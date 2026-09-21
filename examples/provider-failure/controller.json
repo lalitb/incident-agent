@@ -1,0 +1,50 @@
+{
+  "mode": "adaptive",
+  "status": "failed",
+  "stop_reason": "provider_error",
+  "decisions": [
+    {
+      "step": 1,
+      "status": "failed",
+      "planner_version": "adaptive-v2",
+      "model_call": {
+        "provider": "gemini",
+        "requested_model": "gemini/gemini-2.5-flash-lite",
+        "model": null,
+        "response_id": null,
+        "elapsed_ms": 2498.41,
+        "usage": null,
+        "status": "failed",
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "failed",
+            "error_type": "RateLimitError",
+            "rate_limit": {
+              "kind": "daily_quota",
+              "retry_after_seconds": 48.0
+            }
+          }
+        ],
+        "wait_seconds": 0,
+        "retry_stop_reason": "daily_quota",
+        "error_type": "RateLimitError"
+      },
+      "error": "ModelCallError"
+    }
+  ],
+  "report_status": "not_requested",
+  "remediation_status": "not_requested",
+  "model_usage": {
+    "recorded_model_calls": 1,
+    "recorded_provider_attempts": 1,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null
+  },
+  "failure": {
+    "stage": "collecting",
+    "type": "ModelCallError",
+    "detail": "RateLimitError (daily_quota)"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "question": "What explains the change in checkout latency during this time window?",
+  "window": {
+    "start": "2026-09-19T10:30:00Z",
+    "end": "2026-09-19T10:52:00Z"
+  },
+  "collection_errors": [
+    {
+      "tool": "controller",
+      "error": {
+        "code": "invalid_decision",
+        "message": "Investigation stopped before the model declared evidence gathering complete. Assess conclusions using only collected evidence."
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "178edb8da21d4958be18dc1d15a623af",
+      "tool": "query_metrics",
+      "metric": "request_rate",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789813800,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789813810,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789813820,
+              "value": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "evidence_id": "6561c3cd3e844c1b9f8d21a70573e9d5",
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789813800,
+              "value": null
+            },
+            {
+              "timestamp": 1789813810,
+              "value": null
+            },
+            {
+              "timestamp": 1789813820,
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "evidence_id": "ccbd25af25444d0484c4607acf263aed",
+      "tool": "query_metrics",
+      "metric": "pool_utilization",
+      "data": [
+        {
+          "labels": {
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "v1",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789813800,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789813810,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789813820,
+              "value": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "evidence_id": "e79c6edc3daf422fac4cd80362f99796",
+      "tool": "find_traces",
+      "data": [
+        {
+          "trace_id": "001a6d49a6f30597f1a824f9940cc2d0",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789814236946980000",
+          "duration_ms": 206
+        },
+        {
+          "trace_id": "00223da1775e5506350e4c205a67b9ee",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789814177088996000",
+          "duration_ms": 213
+        }
+      ]
+    }
+  ]
+}

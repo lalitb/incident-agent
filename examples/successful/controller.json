@@ -1,0 +1,304 @@
+{
+  "mode": "adaptive",
+  "status": "completed",
+  "stop_reason": "model_finished",
+  "decisions": [
+    {
+      "step": 1,
+      "status": "completed",
+      "planner_version": "adaptive-v3",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": "chatcmpl-6ab00a0fa58f1109117aa05a",
+        "elapsed_ms": 10972.53,
+        "usage": {
+          "input_tokens": 1216,
+          "output_tokens": 143,
+          "total_tokens": 1359
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Establish baseline: check request duration and rate to confirm whether latency changed during the window.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "request_duration_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "query_metrics",
+            "metric": "request_rate",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": []
+      }
+    },
+    {
+      "step": 2,
+      "status": "completed",
+      "planner_version": "adaptive-v3",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": "chatcmpl-6ab00a2a3bcbcf05459c6eb0",
+        "elapsed_ms": 30422.12,
+        "usage": {
+          "input_tokens": 3023,
+          "output_tokens": 243,
+          "total_tokens": 3266
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Latency jumped ~5x (0.21s to ~1.0s) at ~14:17:40 while request rate dropped sharply. This pattern suggests connection pool saturation or increased wait time; checking pool utilization and connection wait to test that hypothesis.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_utilization",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "query_metrics",
+            "metric": "connection_wait_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Latency increase is caused by connection pool saturation increasing connection wait time",
+            "tool": "query_metrics",
+            "metric": "connection_wait_mean_seconds"
+          }
+        ],
+        "resolved_verifications": []
+      }
+    },
+    {
+      "step": 3,
+      "status": "rejected",
+      "planner_version": "adaptive-v3",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": "chatcmpl-6ab00a490578035f7c17e73b",
+        "elapsed_ms": 31899.06,
+        "usage": {
+          "input_tokens": 5681,
+          "output_tokens": 377,
+          "total_tokens": 6058
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Metrics confirm the latency jump (~0.21s to ~1.0s) coincides with connection wait rising to ~0.8s and pool utilization pinned at 1.0 on the new version eval-20260920T141549-v2, which appears at the same timestamp (~1789913859). Next: search logs for deploy/config details of v2 (e.g., pool limit changes) to explain why the new version saturates the pool.",
+        "requests": [
+          {
+            "tool": "search_logs",
+            "metric": null,
+            "contains": "pool",
+            "limit": 10,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "search_logs",
+            "metric": null,
+            "contains": "v2",
+            "limit": 10,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Latency increase is caused by connection pool saturation increasing connection wait time",
+            "tool": "search_logs",
+            "metric": null
+          },
+          {
+            "claim": "The new version eval-20260920T141549-v2 introduced a configuration change (e.g., reduced pool limit) causing saturation",
+            "tool": "search_logs",
+            "metric": null
+          }
+        ],
+        "resolved_verifications": []
+      },
+      "error": "Cannot replace an outstanding verification target"
+    },
+    {
+      "step": 4,
+      "status": "completed",
+      "planner_version": "adaptive-v3",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": "chatcmpl-6ab00a664a22f63014200c3c",
+        "elapsed_ms": 24573.98,
+        "usage": {
+          "input_tokens": 6125,
+          "output_tokens": 196,
+          "total_tokens": 6321
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Metrics show latency jump (~0.21s to ~1.0s) coinciding with connection wait rising to ~0.8s and pool utilization pinned at 1.0 on new version eval-20260920T141549-v2. Searching logs for pool/deploy details to explain why v2 saturates the pool.",
+        "requests": [
+          {
+            "tool": "search_logs",
+            "metric": null,
+            "contains": "pool",
+            "limit": 10,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "search_logs",
+            "metric": null,
+            "contains": "limit",
+            "limit": 10,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          "Latency increase is caused by connection pool saturation increasing connection wait time"
+        ]
+      }
+    },
+    {
+      "step": 5,
+      "status": "accepted",
+      "planner_version": "adaptive-v3",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": "chatcmpl-6ab00a86ecfdbeba18f2fd6a",
+        "elapsed_ms": 30814.77,
+        "usage": {
+          "input_tokens": 7399,
+          "output_tokens": 215,
+          "total_tokens": 7614
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "finish",
+        "reason": "Evidence is sufficient: checkout latency jumped from ~0.21s to ~1.0s at ~14:17:40, exactly when version eval-20260920T141549-v2 started. Logs show v2 started with pool_size=2 versus v1's pool_size=10 (both db_work_seconds=0.2). Pool utilization for v2 is pinned at 1.0 and connection wait mean rose from ~0ms to ~0.8s, accounting for the ~0.8s latency increase. The reduced connection pool size in v2 caused pool saturation and queuing, explaining the latency change.",
+        "requests": [],
+        "verification_needed": [],
+        "resolved_verifications": []
+      }
+    }
+  ],
+  "report_status": "completed",
+  "remediation_status": "not_requested",
+  "model_usage": {
+    "recorded_model_calls": 6,
+    "recorded_provider_attempts": 6,
+    "input_tokens": 29544,
+    "output_tokens": 3361,
+    "total_tokens": 32905
+  },
+  "verification_needed": {},
+  "report_model_call": {
+    "provider": "moonshot",
+    "requested_model": "moonshot/kimi-k3",
+    "model": "moonshot/kimi-k3",
+    "response_id": "chatcmpl-6ab00aa240709253f0c473e4",
+    "elapsed_ms": 82344.84,
+    "usage": {
+      "input_tokens": 6100,
+      "output_tokens": 2187,
+      "total_tokens": 8287
+    },
+    "status": "completed",
+    "max_output_tokens": 8192,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed"
+      }
+    ],
+    "wait_seconds": 0,
+    "finish_reason": "stop",
+    "prompt_version": "incident-diagnosis-v12",
+    "evidence_summary": {
+      "version": "evidence-summary-v2",
+      "bucket_seconds": 60,
+      "original_payload_bytes": 9938,
+      "summarized_payload_bytes": 7963
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "report": {
+    "assessment": "likely_cause_identified",
+    "configuration_comparisons": [
+      {
+        "metric": "pool_limit",
+        "observations": [
+          {
+            "service_version": "eval-20260920T141549-v1",
+            "value": 10.0,
+            "evidence_id": "4a1b8a9a69904ea399014c3bf02566bb"
+          },
+          {
+            "service_version": "eval-20260920T141549-v2",
+            "value": 2.0,
+            "evidence_id": "4a1b8a9a69904ea399014c3bf02566bb"
+          },
+          {
+            "service_version": "v2",
+            "value": 2.0,
+            "evidence_id": "4a1b8a9a69904ea399014c3bf02566bb"
+          }
+        ]
+      }
+    ],
+    "trace_breakdowns": [],
+    "timeline_observations": [
+      {
+        "statement": "Checkout request-duration mean was about 0.21 seconds per request in the 14:16 bucket.",
+        "start_utc": "2026-09-20T14:16:00Z",
+        "end_utc": "2026-09-20T14:17:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "fa73849694b142a794593f980aafb52f"
+        ]
+      },
+      {
+        "statement": "Checkout request-duration mean rose to about 0.59 seconds in the 14:17 bucket, then about 1.03 seconds in the 14:18 bucket.",
+        "start_utc": "2026-09-20T14:17:00Z",
+        "end_utc": "2026-09-20T14:19:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "fa73849694b142a794593f980aafb52f"
+        ]
+      },
+      {
+        "statement": "Connection-wait mean rose from about 0.00029 seconds in the 14:16 bucket to about 0.39 seconds in the 14:17 bucket and about 0.83 seconds in the 14:18 bucket.",
+        "start_utc": "2026-09-20T14:16:00Z",
+        "end_utc": "2026-09-20T14:19:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "62e7ef0cce314fb79091b6cd421c3341"
+        ]
+      },
+      {
+        "statement": "Version eval-20260920T141549-v2 first reported pool metrics in samples starting at 14:17:29Z with pool_limit 2 connections, while v1 reported pool_limit 10 connections.",
+        "start_utc": "2026-09-20T14:17:00Z",
+        "end_utc": "2026-09-20T14:19:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "4a1b8a9a69904ea399014c3bf02566bb"
+        ]
+      },
+      {
+        "statement": "Pool utilization for v2 reached 1.0 (fully occupied) in both the 14:17 and 14:18 buckets; v1 utilization peaked at 1.0 in the 14:16 bucket then declined.",
+        "start_utc": "2026-09-20T14:16:00Z",
+        "end_utc": "2026-09-20T14:19:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "b11d678848c44059a9afb0ade77fa873"
+        ]
+      },
+      {
+        "statement": "Request rate declined from a 14:16 bucket mean of about 31.6 requests/second to about 8.4 requests/second in the 14:18 bucket.",
+        "start_utc": "2026-09-20T14:16:00Z",
+        "end_utc": "2026-09-20T14:19:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "69a9aef0120a48719ff85ecf6013b246"
+        ]
+      }
+    ],
+    "leading_hypothesis": {
+      "statement": "The checkout latency increase is likely explained by the rollout of a version (eval-20260920T141549-v2) with an observed connection pool limit of 2 instead of 10; the smaller pool became fully occupied, so requests spent most of their time waiting for a connection rather than executing, which matches the observed rise in connection-wait time that accounts for most of the added request duration.",
+      "evidence_ids": [
+        "4a1b8a9a69904ea399014c3bf02566bb",
+        "b11d678848c44059a9afb0ade77fa873",
+        "62e7ef0cce314fb79091b6cd421c3341",
+        "fa73849694b142a794593f980aafb52f"
+      ],
+      "verification_needed": [
+        "Retrieve traces of slow checkout requests to confirm that connection acquisition, not downstream query execution, dominates request duration.",
+        "Confirm which service_version(s) were actually serving traffic during the degraded interval and whether the pool_limit change was an intended configuration."
+      ]
+    },
+    "supporting_findings": [
+      {
+        "statement": "Checkout request-duration mean increased from 0.207082 seconds in the 14:16 bucket to 1.03257 seconds in the 14:18 bucket.",
+        "evidence_ids": [
+          "fa73849694b142a794593f980aafb52f"
+        ]
+      },
+      {
+        "statement": "Connection-wait mean increased from 0.000288413 seconds in the 14:16 bucket to 0.826957 seconds in the 14:18 bucket, accounting for most of the added latency.",
+        "evidence_ids": [
+          "62e7ef0cce314fb79091b6cd421c3341",
+          "fa73849694b142a794593f980aafb52f"
+        ]
+      },
+      {
+        "statement": "The observed pool_limit for service_version eval-20260920T141549-v1 was 10 connections, while eval-20260920T141549-v2 reported 2 connections starting from samples at 14:17:29Z.",
+        "evidence_ids": [
+          "4a1b8a9a69904ea399014c3bf02566bb"
+        ]
+      },
+      {
+        "statement": "Pool utilization for v2 reached 1.0 (fully occupied) in the 14:17 and 14:18 buckets.",
+        "evidence_ids": [
+          "b11d678848c44059a9afb0ade77fa873"
+        ]
+      },
+      {
+        "statement": "Request-rate sample mean fell to 8.35227 requests/second in the 14:18 bucket from 31.6394 requests/second in the 14:16 bucket, consistent with throughput limited by connection waits.",
+        "evidence_ids": [
+          "69a9aef0120a48719ff85ecf6013b246",
+          "62e7ef0cce314fb79091b6cd421c3341"
+        ]
+      }
+    ],
+    "contradicting_findings": [
+      {
+        "statement": "A lingering pool_limit gauge of 2 connections for service_version \"v2\" exists across the whole window, but its pool utilization stayed 0.0, so it may be an idle or stale series rather than a serving process; it does not contradict the v1-to-v2 pool change but its role is unclear.",
+        "evidence_ids": [
+          "4a1b8a9a69904ea399014c3bf02566bb",
+          "b11d678848c44059a9afb0ade77fa873"
+        ]
+      }
+    ],
+    "confidence": "medium",
+    "missing_information": [
+      "No traces were retrieved, so the internal duration breakdown of slow checkout requests (connection wait versus query execution) is unverified.",
+      "No deployment or startup logs were collected, so the timing and intent of the version change from eval-20260920T141549-v1 to eval-20260920T141549-v2 is not established.",
+      "The 14:15 bucket had no valid latency samples (0 valid, 2 missing), so the pre-incident baseline relies on the 14:16 bucket."
+    ],
+    "recommended_next_steps": [
+      "Retrieve get_trace evidence for slow checkout requests during the 14:17-14:18 window to confirm connection acquisition dominates duration.",
+      "As a proposed test only, restore or raise the connection pool limit toward the previously observed 10 connections for the new version and verify the effect on connection-wait and request-duration metrics before treating it as a fix.",
+      "Collect deployment or startup logs to establish when the v2 configuration was applied and whether the pool_limit of 2 was intended."
+    ],
+    "citations": [
+      {
+        "field": "missing_information.2",
+        "evidence_ids": [
+          "fa73849694b142a794593f980aafb52f"
+        ]
+      },
+      {
+        "field": "recommended_next_steps.1",
+        "evidence_ids": [
+          "4a1b8a9a69904ea399014c3bf02566bb"
+        ]
+      }
+    ]
+  },
+  "validation_error": "Rejected report: unsupported quantitative claim: missing_information.2: '0' (no matching cited latency value); missing_information.2: '2' (no matching cited latency value); recommended_next_steps.0: '14:17' (timing claim has no matching cited timestamp); recommended_next_steps.0: '14:18' (timing claim has no matching cited timestamp); recommended_next_steps.2: '2' (no matching cited pool_limit value)",
+  "model_call": {
+    "provider": "moonshot",
+    "requested_model": "moonshot/kimi-k3",
+    "model": "moonshot/kimi-k3",
+    "response_id": "chatcmpl-6ab0001b5733f866ce9fbe08",
+    "elapsed_ms": 77657.46,
+    "usage": {
+      "input_tokens": 6284,
+      "output_tokens": 2001,
+      "total_tokens": 8285
+    },
+    "status": "completed",
+    "max_output_tokens": 8192,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed"
+      }
+    ],
+    "wait_seconds": 0,
+    "finish_reason": "stop",
+    "prompt_version": "incident-diagnosis-v11",
+    "evidence_summary": {
+      "version": "evidence-summary-v2",
+      "bucket_seconds": 60,
+      "original_payload_bytes": 11103,
+      "summarized_payload_bytes": 8198
+    }
+  }
+}

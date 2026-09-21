@@ -1,0 +1,12 @@
+{
+  "run_id": "1dec3483adad4bf6bab02d1700cf4f2f",
+  "created_at": "2026-09-20T04:00:08.906465+00:00",
+  "question": "What explains the change in checkout latency during this time window?",
+  "window": {
+    "start": "2026-09-19T10:30:00Z",
+    "end": "2026-09-19T10:52:00Z"
+  },
+  "evidence": [],
+  "collection_errors": [],
+  "calls": []
+}

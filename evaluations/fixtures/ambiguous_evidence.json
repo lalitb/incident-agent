@@ -1,0 +1,212 @@
+{
+  "run_id": "c1721f7daf104849b3193ec63cde4bc9",
+  "created_at": "2026-09-20T14:22:23.810470+00:00",
+  "question": "What explains the change in checkout latency during this time window?",
+  "window": {
+    "start": "2026-09-20T14:15:49.689852Z",
+    "end": "2026-09-20T14:18:49.820739Z"
+  },
+  "evidence": [
+    {
+      "evidence_id": "142625e9a54944868d4b44ee6049e1a5",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "sum(rate(checkout_requests_total{service_name=\"checkout\"}[30s]))",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.845900+00:00",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 15.809651754561413
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 31.986792805045535
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 47.43810247590097
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 47.68000000000001
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 46.921876875075
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 46.876249900008
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 30.12048192771085
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 11.245883203470159
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 1.6588507815885079
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 5.003844807759613
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 8.335965333333332
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 9.600384015360614
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 9.680387215488619
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 9.680387215488619
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 8.32
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 4.480179207168287
+            }
+          ]
+        }
+      ],
+      "metric": "request_rate",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "9623d9769c8c491f9b02dc553c8142b9",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "sum(rate(checkout_duration_seconds_sum{service_name=\"checkout\"}[30s])) / sum(rate(checkout_duration_seconds_count{service_name=\"checkout\"}[30s]))",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.854851+00:00",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 0.20697791311343722
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 0.20682393215144923
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 0.20675579852500733
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 0.20721963239148503
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 0.20763391666237396
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 0.20809683302908488
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 0.20800703472411258
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 0.20828558047485007
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 0.922286531125087
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 0.9979236762886408
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 1.0119709074255845
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 1.0359737050540085
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 1.034706528055624
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 1.0324362346759135
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 1.0302664398914203
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 1.0294741927178361
+            }
+          ]
+        }
+      ],
+      "metric": "request_duration_mean_seconds",
+      "warnings": [],
+      "content_is_untrusted": true
+    }
+  ],
+  "collection_errors": [],
+  "calls": [],
+  "fixture": true
+}

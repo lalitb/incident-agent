@@ -1,0 +1,168 @@
+{
+  "report": {
+    "assessment": "likely_cause_identified",
+    "configuration_comparisons": [
+      {
+        "metric": "pool_utilization",
+        "observations": [
+          {
+            "service_version": "v1",
+            "value": 0.0,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          },
+          {
+            "service_version": "v1",
+            "value": 1.0,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          },
+          {
+            "service_version": "v1",
+            "value": 0.616667,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          },
+          {
+            "service_version": "v2",
+            "value": 0.5,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          },
+          {
+            "service_version": "v2",
+            "value": 1.0,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          },
+          {
+            "service_version": "v2",
+            "value": 0.666667,
+            "evidence_id": "ccbd25af25444d0484c4607acf263aed"
+          }
+        ]
+      }
+    ],
+    "trace_breakdowns": [
+      {
+        "trace_id": "001a6d49a6f30597f1a824f9940cc2d0",
+        "evidence_id": "e79c6edc3daf422fac4cd80362f99796",
+        "spans": []
+      },
+      {
+        "trace_id": "00223da1775e5506350e4c205a67b9ee",
+        "evidence_id": "e79c6edc3daf422fac4cd80362f99796",
+        "spans": []
+      }
+    ],
+    "timeline_observations": [
+      {
+        "statement": "Checkout request rate was low between 10:30 and 10:35 UTC, then increased significantly peaking around 10:36-10:37 UTC, before dropping and showing intermittent smaller peaks until 10:50 UTC.",
+        "start_utc": "2026-09-19T10:30:00Z",
+        "end_utc": "2026-09-19T10:52:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "178edb8da21d4958be18dc1d15a623af"
+        ]
+      },
+      {
+        "statement": "Checkout request duration mean was low between 10:30 and 10:37 UTC, with some samples recorded around 0.21 seconds. It then increased significantly starting around 10:48 UTC, with samples around 1.03 seconds, and continued to show elevated durations until 10:50 UTC.",
+        "start_utc": "2026-09-19T10:30:00Z",
+        "end_utc": "2026-09-19T10:52:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "6561c3cd3e844c1b9f8d21a70573e9d5"
+        ]
+      },
+      {
+        "statement": "Checkout pool utilization was 0.0 between 10:30 and 10:35 UTC, then increased to 1.0 between 10:36 and 10:37 UTC. Utilization dropped and showed intermittent values between 0.0 and 1.0 until 10:47 UTC. From 10:48 UTC, utilization for service version v2 increased to 1.0 and remained high until 10:50 UTC.",
+        "start_utc": "2026-09-19T10:30:00Z",
+        "end_utc": "2026-09-19T10:52:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "ccbd25af25444d0484c4607acf263aed"
+        ]
+      },
+      {
+        "statement": "Traces for POST /checkout with duration >= 100ms were observed between 10:37:17 UTC and 10:38:37 UTC.",
+        "start_utc": "2026-09-19T10:37:16.946980Z",
+        "end_utc": "2026-09-19T10:38:37.088996Z",
+        "precision": "source_timestamp",
+        "evidence_ids": [
+          "e79c6edc3daf422fac4cd80362f99796"
+        ]
+      }
+    ],
+    "leading_hypothesis": {
+      "statement": "The increase in checkout latency is likely due to increased load causing pool utilization to reach maximum capacity between 10:36-10:37 UTC and again from 10:48 UTC onwards for service version v2. This high utilization correlates with the observed increase in request duration.",
+      "evidence_ids": [
+        "178edb8da21d4958be18dc1d15a623af",
+        "6561c3cd3e844c1b9f8d21a70573e9d5",
+        "ccbd25af25444d0484c4607acf263aed"
+      ]
+    },
+    "supporting_findings": [
+      {
+        "statement": "Checkout request rate shows a significant increase between 10:36 and 10:37 UTC, coinciding with the first instance of full pool utilization.",
+        "evidence_ids": [
+          "178edb8da21d4958be18dc1d15a623af",
+          "ccbd25af25444d0484c4607acf263aed"
+        ]
+      },
+      {
+        "statement": "Checkout request duration mean increased from approximately 0.21 seconds to over 1.03 seconds starting around 10:48 UTC, which aligns with the second period of full pool utilization observed for service version v2.",
+        "evidence_ids": [
+          "6561c3cd3e844c1b9f8d21a70573e9d5",
+          "ccbd25af25444d0484c4607acf263aed"
+        ]
+      },
+      {
+        "statement": "There are traces for POST /checkout with durations >= 100ms observed around 10:37-10:38 UTC, which falls within the initial period of high load and full pool utilization.",
+        "evidence_ids": [
+          "e79c6edc3daf422fac4cd80362f99796",
+          "ccbd25af25444d0484c4607acf263aed"
+        ]
+      }
+    ],
+    "contradicting_findings": [],
+    "confidence": "high",
+    "missing_information": [
+      "No logs were retrieved for the checkout service within the specified time window.",
+      "The trace breakdown information is empty, so the specific operations contributing to the trace duration are unknown."
+    ],
+    "recommended_next_steps": [
+      "Investigate the cause of the increased load on the checkout service.",
+      "Examine the configuration of the checkout pool limit for service version v2.",
+      "Monitor pool utilization and request duration more closely to understand the long-term impact of the recent load increase."
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "e79c6edc3daf422fac4cd80362f99796",
+      "tool": "find_traces",
+      "source": "http://localhost:3200/api/search",
+      "query_parameters": {
+        "q": "{ resource.service.name = \"checkout\" && name = \"POST /checkout\" && duration >= 100ms }",
+        "start": 1789813800,
+        "end": 1789815120,
+        "limit": 2
+      },
+      "retrieved_at": "2026-09-19T14:29:40.827622+00:00",
+      "data": [
+        {
+          "trace_id": "001a6d49a6f30597f1a824f9940cc2d0",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789814236946980000",
+          "duration_ms": 206
+        },
+        {
+          "trace_id": "00223da1775e5506350e4c205a67b9ee",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789814177088996000",
+          "duration_ms": 213
+        }
+      ],
+      "possibly_truncated": true,
+      "selection": "Limited matching traces; not ranked slowest",
+      "content_is_untrusted": true
+    }
+  ],
+  "validation_error": "Rejected report: unsupported configuration metric"
+}

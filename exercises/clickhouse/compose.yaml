@@ -1,0 +1,42 @@
+# Paths are relative to telemetry-lab/compose.yaml, the first Compose file.
+services:
+  collector:
+    volumes:
+      - ../exercises/clickhouse/collector.yaml:/etc/otelcol/config.yaml:ro
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.3.2.39
+    environment:
+      CLICKHOUSE_DB: otel
+      CLICKHOUSE_USER: otel
+      CLICKHOUSE_PASSWORD: learning-only
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    ports:
+      - "127.0.0.1:8123:8123" # HTTP / SQL
+      - "127.0.0.1:9000:9000" # Native protocol
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test:
+        - CMD
+        - clickhouse-client
+        - --user
+        - otel
+        - --password
+        - learning-only
+        - --query
+        - SELECT 1
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+volumes:
+  clickhouse-data:

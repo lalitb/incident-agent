@@ -1,0 +1,1020 @@
+{
+  "run_id": "c1721f7daf104849b3193ec63cde4bc9",
+  "created_at": "2026-09-20T14:22:23.810470+00:00",
+  "question": "What explains the change in checkout latency during this time window?",
+  "window": {
+    "start": "2026-09-20T14:15:49.689852Z",
+    "end": "2026-09-20T14:18:49.820739Z"
+  },
+  "evidence": [
+    {
+      "evidence_id": "142625e9a54944868d4b44ee6049e1a5",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "sum(rate(checkout_requests_total{service_name=\"checkout\"}[30s]))",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.845900+00:00",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 15.809651754561413
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 31.986792805045535
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 47.43810247590097
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 47.68000000000001
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 46.921876875075
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 46.876249900008
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 30.12048192771085
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 11.245883203470159
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 1.6588507815885079
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 5.003844807759613
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 8.335965333333332
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 9.600384015360614
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 9.680387215488619
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 9.680387215488619
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 8.32
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 4.480179207168287
+            }
+          ]
+        }
+      ],
+      "metric": "request_rate",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "9623d9769c8c491f9b02dc553c8142b9",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "sum(rate(checkout_duration_seconds_sum{service_name=\"checkout\"}[30s])) / sum(rate(checkout_duration_seconds_count{service_name=\"checkout\"}[30s]))",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.854851+00:00",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 0.20697791311343722
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 0.20682393215144923
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 0.20675579852500733
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 0.20721963239148503
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 0.20763391666237396
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 0.20809683302908488
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 0.20800703472411258
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 0.20828558047485007
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 0.922286531125087
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 0.9979236762886408
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 1.0119709074255845
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 1.0359737050540085
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 1.034706528055624
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 1.0324362346759135
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 1.0302664398914203
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 1.0294741927178361
+            }
+          ]
+        }
+      ],
+      "metric": "request_duration_mean_seconds",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "45da826754b349b39ddc2feb925e70fc",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "sum(rate(checkout_connection_wait_seconds_sum{service_name=\"checkout\"}[30s])) / sum(rate(checkout_connection_wait_seconds_count{service_name=\"checkout\"}[30s]))",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.861884+00:00",
+      "data": [
+        {
+          "labels": {},
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": null
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 0.0009197975345515563
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 0.00045502711445528124
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 2.5493359922715677e-05
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 2.1352477691248812e-05
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 2.039677204638847e-05
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 1.856223904757572e-05
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 1.893474553661371e-05
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 1.9542924645874235e-05
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 0.7204695853354354
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 0.7914919312528601
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 0.8050984688510244
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 0.8280123907747717
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 0.8271410160107261
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 0.8253104054900117
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 0.8237226367532502
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 0.8305965098721737
+            }
+          ]
+        }
+      ],
+      "metric": "connection_wait_mean_seconds",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "c56d06c026c241abb85a0f9e9cc768b3",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "checkout_pool_limit{service_name=\"checkout\"}",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.869075+00:00",
+      "data": [
+        {
+          "labels": {
+            "__name__": "checkout_pool_limit",
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v1",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913769.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 10.0
+            }
+          ]
+        },
+        {
+          "labels": {
+            "__name__": "checkout_pool_limit",
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v2",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913849.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 2.0
+            }
+          ]
+        },
+        {
+          "labels": {
+            "__name__": "checkout_pool_limit",
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "v2",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 2.0
+            }
+          ]
+        }
+      ],
+      "metric": "pool_limit",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "fddabdeabe3c4185a9b59e0eef286b71",
+      "tool": "query_metrics",
+      "source": "http://localhost:9090/api/v1/query_range",
+      "query_parameters": {
+        "query": "checkout_pool_in_use{service_name=\"checkout\"} / checkout_pool_limit{service_name=\"checkout\"}",
+        "start": 1789913749.689852,
+        "end": 1789913929.820739,
+        "step": 10,
+        "timeout": "10s"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.879004+00:00",
+      "data": [
+        {
+          "labels": {
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v1",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913769.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 0.9
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "labels": {
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v2",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913849.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "labels": {
+            "deployment_environment_name": "local",
+            "exported_job": "checkout",
+            "instance": "collector:8889",
+            "job": "collector",
+            "service_name": "checkout",
+            "service_version": "v2",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "points": [
+            {
+              "timestamp": 1789913749.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913759.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913769.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913779.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913789.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913799.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913809.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913819.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913829.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913839.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913849.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913859.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913869.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913879.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913889.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913899.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913909.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913919.69,
+              "value": 0.0
+            },
+            {
+              "timestamp": 1789913929.69,
+              "value": 0.0
+            }
+          ]
+        }
+      ],
+      "metric": "pool_utilization",
+      "warnings": [],
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "edc486f96dd54f09908f5e442eab2d5d",
+      "tool": "search_logs",
+      "source": "http://localhost:3100/loki/api/v1/query_range",
+      "query_parameters": {
+        "query": "{service_name=\"checkout\"} |= \"Checkout started\"",
+        "start": "1789913749689851904",
+        "end": "1789913929820739072",
+        "limit": 10,
+        "direction": "backward"
+      },
+      "retrieved_at": "2026-09-20T14:22:23.940953+00:00",
+      "data": [
+        {
+          "timestamp_unix_nano": "1789913838039642112",
+          "labels": {
+            "code_filepath": "/Users/[REDACTED_USER]/personal/incident-agent/demo/checkout.py",
+            "code_function": "lifespan",
+            "code_lineno": "77",
+            "deployment_environment_name": "local",
+            "detected_level": "info",
+            "observed_timestamp": "1789913838039696000",
+            "scope_name": "checkout",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v2",
+            "severity_number": "9",
+            "severity_text": "INFO",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "message": "Checkout started: pool_size=2 db_work_seconds=0.2",
+          "message_truncated": false
+        },
+        {
+          "timestamp_unix_nano": "1789913755875700992",
+          "labels": {
+            "code_filepath": "/Users/[REDACTED_USER]/personal/incident-agent/demo/checkout.py",
+            "code_function": "lifespan",
+            "code_lineno": "77",
+            "deployment_environment_name": "local",
+            "detected_level": "info",
+            "observed_timestamp": "1789913755875743000",
+            "scope_name": "checkout",
+            "service_name": "checkout",
+            "service_version": "eval-20260920T141549-v1",
+            "severity_number": "9",
+            "severity_text": "INFO",
+            "telemetry_sdk_language": "python",
+            "telemetry_sdk_name": "opentelemetry",
+            "telemetry_sdk_version": "1.31.1"
+          },
+          "message": "Checkout started: pool_size=10 db_work_seconds=0.2",
+          "message_truncated": false
+        }
+      ],
+      "possibly_truncated": false,
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "b2cde000cd8242e29315918e7525e295",
+      "tool": "find_traces",
+      "source": "http://localhost:3200/api/search",
+      "query_parameters": {
+        "q": "{ resource.service.name = \"checkout\" && name = \"POST /checkout\" && duration >= 800ms }",
+        "start": 1789913749,
+        "end": 1789913930,
+        "limit": 3
+      },
+      "retrieved_at": "2026-09-20T14:22:24.003626+00:00",
+      "data": [
+        {
+          "trace_id": "039d739180584825077c0cda26728758",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789913856734987000",
+          "duration_ms": 1044
+        },
+        {
+          "trace_id": "00dc261adfefb95b2a45176dae42e2a4",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789913852619107000",
+          "duration_ms": 1022
+        },
+        {
+          "trace_id": "01cb470541c963906c8bafd32fc3f535",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789913852198583000",
+          "duration_ms": 1034
+        }
+      ],
+      "possibly_truncated": true,
+      "selection": "Limited matching traces; not ranked slowest",
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "a371280c07dd43b2a0d89b4098e211d9",
+      "tool": "get_trace",
+      "source": "http://localhost:3200/api/traces/039d739180584825077c0cda26728758",
+      "query_parameters": {
+        "start": 1789913749,
+        "end": 1789913930
+      },
+      "retrieved_at": "2026-09-20T14:22:24.049379+00:00",
+      "data": [
+        {
+          "name": "POST /checkout",
+          "span_id": "9a72c687ec2b1cd9",
+          "parent_span_id": null,
+          "start_time_unix_nano": "1789913856734987000",
+          "duration_ms": 1044.055,
+          "status": {}
+        },
+        {
+          "name": "db.acquire_connection",
+          "span_id": "aa3ec1daea0c57e3",
+          "parent_span_id": "9a72c687ec2b1cd9",
+          "start_time_unix_nano": "1789913856735010000",
+          "duration_ms": 838.043,
+          "status": {}
+        },
+        {
+          "name": "db.checkout_query",
+          "span_id": "68057294fa11c803",
+          "parent_span_id": "9a72c687ec2b1cd9",
+          "start_time_unix_nano": "1789913857573105000",
+          "duration_ms": 205.141,
+          "status": {}
+        }
+      ],
+      "trace_id": "039d739180584825077c0cda26728758",
+      "service": "checkout",
+      "truncated": false,
+      "matching_span_count": 3,
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "ea6208bbad3f499d8c702b424380b3ae",
+      "tool": "get_trace",
+      "source": "http://localhost:3200/api/traces/00dc261adfefb95b2a45176dae42e2a4",
+      "query_parameters": {
+        "start": 1789913749,
+        "end": 1789913930
+      },
+      "retrieved_at": "2026-09-20T14:22:24.070055+00:00",
+      "data": [
+        {
+          "name": "POST /checkout",
+          "span_id": "cd7b4276cda0fdaf",
+          "parent_span_id": null,
+          "start_time_unix_nano": "1789913852619107000",
+          "duration_ms": 1022.939,
+          "status": {}
+        },
+        {
+          "name": "db.acquire_connection",
+          "span_id": "8c1938b7c1c74e7e",
+          "parent_span_id": "cd7b4276cda0fdaf",
+          "start_time_unix_nano": "1789913852619130000",
+          "duration_ms": 818.414,
+          "status": {}
+        },
+        {
+          "name": "db.checkout_query",
+          "span_id": "ee3b3dc30cc1da10",
+          "parent_span_id": "cd7b4276cda0fdaf",
+          "start_time_unix_nano": "1789913853437599000",
+          "duration_ms": 203.582,
+          "status": {}
+        }
+      ],
+      "trace_id": "00dc261adfefb95b2a45176dae42e2a4",
+      "service": "checkout",
+      "truncated": false,
+      "matching_span_count": 3,
+      "content_is_untrusted": true
+    },
+    {
+      "evidence_id": "3f60e3114c6943d7ab50e6b57f650171",
+      "tool": "get_trace",
+      "source": "http://localhost:3200/api/traces/01cb470541c963906c8bafd32fc3f535",
+      "query_parameters": {
+        "start": 1789913749,
+        "end": 1789913930
+      },
+      "retrieved_at": "2026-09-20T14:22:24.089894+00:00",
+      "data": [
+        {
+          "name": "POST /checkout",
+          "span_id": "108192d4c0935ee2",
+          "parent_span_id": null,
+          "start_time_unix_nano": "1789913852198583000",
+          "duration_ms": 1034.103,
+          "status": {}
+        },
+        {
+          "name": "db.acquire_connection",
+          "span_id": "b1b6d019866d6dde",
+          "parent_span_id": "108192d4c0935ee2",
+          "start_time_unix_nano": "1789913852198613000",
+          "duration_ms": 828.403,
+          "status": {}
+        },
+        {
+          "name": "db.checkout_query",
+          "span_id": "ca3c21f37cbd6724",
+          "parent_span_id": "108192d4c0935ee2",
+          "start_time_unix_nano": "1789913853027065000",
+          "duration_ms": 204.636,
+          "status": {}
+        }
+      ],
+      "trace_id": "01cb470541c963906c8bafd32fc3f535",
+      "service": "checkout",
+      "truncated": false,
+      "matching_span_count": 3,
+      "content_is_untrusted": true
+    }
+  ],
+  "collection_errors": [],
+  "calls": [],
+  "fixture": true
+}

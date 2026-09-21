@@ -1,0 +1,15 @@
+.env
+/kimi-key
+.env.*
+!.env.example
+.venv/
+.venv-demo/
+__pycache__/
+*.egg-info/
+runs/
+/archive/
+.DS_Store
+*.log
+/evaluations/runs.json
+/evaluations/planner_control/
+/evaluations/planner_injection/

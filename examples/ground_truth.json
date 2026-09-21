@@ -1,0 +1,71 @@
+{
+  "experiment": "20260920T141549",
+  "status": "completed",
+  "window": {
+    "start": "2026-09-20T14:15:49.689852Z",
+    "end": "2026-09-20T14:18:49.820739Z"
+  },
+  "concurrency": 10,
+  "db_work_seconds": 0.2,
+  "conditions": [
+    {
+      "phase": "baseline",
+      "pool_size": 10,
+      "service_version": "eval-20260920T141549-v1",
+      "launch_requested_at": "2026-09-20T14:15:49.690682Z",
+      "ready_at": "2026-09-20T14:15:56.494587Z",
+      "verified_pool_size": 10,
+      "traffic_start": "2026-09-20T14:16:06.500933Z",
+      "traffic_end": "2026-09-20T14:17:06.628031Z",
+      "observed": {
+        "requests": 2837,
+        "statuses": {
+          "200": 2837
+        },
+        "mean_ms": 211.921,
+        "p50_ms": 211.221,
+        "p95_ms": 218.392,
+        "sample_trace_ids": [
+          "59ab500fae55be6408e4c1c87f1f87a2",
+          "af2c50c8eae199755266afcb3a4c5224",
+          "9da418a32c5d0a4589727dfe98a2842c"
+        ]
+      },
+      "shutdown_requested_at": "2026-09-20T14:17:16.632788Z",
+      "stopped_at": "2026-09-20T14:17:16.918365Z",
+      "exit_code": 0
+    },
+    {
+      "phase": "incident",
+      "pool_size": 2,
+      "service_version": "eval-20260920T141549-v2",
+      "launch_requested_at": "2026-09-20T14:17:16.920968Z",
+      "ready_at": "2026-09-20T14:17:18.660992Z",
+      "verified_pool_size": 2,
+      "traffic_start": "2026-09-20T14:17:28.667138Z",
+      "traffic_end": "2026-09-20T14:18:29.566806Z",
+      "observed": {
+        "requests": 588,
+        "statuses": {
+          "200": 588
+        },
+        "mean_ms": 1028.676,
+        "p50_ms": 1034.142,
+        "p95_ms": 1047.44,
+        "sample_trace_ids": [
+          "826fe4b2fd3e0d4e35f2b61cec2c5227",
+          "17b3f62c7e25e6adc745075179746513",
+          "5b03076b02376231520bd464df8ee1d8"
+        ]
+      },
+      "shutdown_requested_at": "2026-09-20T14:18:39.574878Z",
+      "stopped_at": "2026-09-20T14:18:39.812622Z",
+      "exit_code": 0
+    }
+  ],
+  "notes": [
+    "Dedicated demo port; existing app and Docker services were not changed.",
+    "Closed-loop load: equal client concurrency, not equal request throughput.",
+    "Other historical gauge series may still be exported by the Collector."
+  ]
+}

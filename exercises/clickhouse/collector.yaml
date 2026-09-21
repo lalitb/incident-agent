@@ -1,0 +1,75 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 256
+    spike_limit_mib: 64
+
+  batch:
+    timeout: 1s
+    send_batch_size: 1024
+
+exporters:
+  # Exposes incoming metrics for Prometheus to scrape.
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    resource_to_telemetry_conversion:
+      enabled: true
+
+  # Sends traces to Tempo.
+  otlp/tempo:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
+  # Sends logs using Loki's native OTLP endpoint.
+  otlphttp/loki:
+    endpoint: http://loki:3100/otlp
+
+  # Stores copies of metrics, traces and logs in ClickHouse.
+  clickhouse:
+    endpoint: tcp://clickhouse:9000?dial_timeout=10s
+    username: otel
+    password: learning-only
+    database: otel
+    create_schema: true
+    ttl: 72h
+    timeout: 10s
+    sending_queue:
+      queue_size: 1000
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions:
+    - health_check
+
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus, clickhouse]
+
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/tempo, clickhouse]
+
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlphttp/loki, clickhouse]
