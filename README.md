@@ -243,6 +243,11 @@ are not recorded. `agent.evaluate` can inspect one source with `--evidence-id`.
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
+[GitHub Actions](https://github.com/lalitb/incident-agent/actions/workflows/sanity.yml)
+runs these tests on Python 3.11 and 3.14 for pull requests and pushes to `main`.
+It also checks dependency compatibility, Python syntax, and both Compose
+configurations. No API keys, model calls, or running telemetry backends are needed.
+
 The suite is self-contained and offline. It covers budgets, recovery, scope,
 redaction, failures, structured reporting, and approval. Tests for the retired
 prose parser are archived; keeping the previous count of 91 is not a goal.
