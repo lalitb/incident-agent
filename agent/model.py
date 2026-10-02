@@ -2,12 +2,13 @@ import json
 
 from .gateway import redact
 from .llm import generate_structured
-from .schemas import IncidentReport
+from .schemas import IncidentReport, VerificationCheck
 from .summarize import summarize_evidence
 from .validate_report import cap_confidence, validate_report
+from .verification import unresolved_descriptions
 
 
-PROMPT_VERSION = "structured-observations-v1"
+PROMPT_VERSION = "structured-observations-v2.1"
 
 INSTRUCTIONS = """
 Analyze the checkout incident using only the supplied evidence. Produce a concise
@@ -32,7 +33,10 @@ Structured observations:
   copying source_timestamp_utc. A log event is an instant, not a duration between
   event and observation timestamps. A range needs distinct observed endpoints.
   For metrics use metric_bucket and supplied boundaries (60-second buckets).
-  Use sample_timestamp only if actual sample timestamps were supplied.
+  Use sample_timestamp only for query_metrics when actual sample timestamps were supplied.
+  Never cite find_traces in timeline_observations, even when a discovery result
+  contains source_timestamp_utc. Every citation must match the precision's allowed
+  evidence types; omit the timeline observation if only discovery data supports it.
 
 Interpretation and human review:
 - Cite supplied evidence IDs for every finding. Python checks references and
@@ -59,6 +63,11 @@ Interpretation and human review:
   High confidence needs multiple collected signal types and an observed mechanism;
   a trace-search summary alone is not corroboration. Exhausting a collection
   budget does not establish a cause; state what remains unknown.
+- verification_checks is controller-owned history, not something to rewrite.
+  Pending/unresolvable checks are uncertainty, including their recorded reasons.
+  A resolved check means citation/structured-fact validation plus a MODEL semantic
+  judgment, not independent proof of a hypothesis. A successful empty query or
+  unavailable telemetry never supports a causal conclusion.
 """
 
 
@@ -70,13 +79,15 @@ class ReportValidationError(ValueError):
         super().__init__(self.detail)
 
 
-def generate_report(question, evidence, collection_errors, on_progress=None, verification_needed=()):
+def generate_report(question, evidence, collection_errors, on_progress=None, verification_needed=(),
+                    verification_checks=()):
     # Sanitize the complete payload before summarizing.
     payload, _ = redact({
         "question": question,
         "evidence": evidence,
         "collection_errors": collection_errors,
         "verification_needed": list(verification_needed),
+        "verification_checks": list(verification_checks),
     })
 
     original_content = json.dumps(
@@ -138,9 +149,13 @@ def generate_report(question, evidence, collection_errors, on_progress=None, ver
         "summarized_payload_bytes": summarized_bytes,
     }
 
+    report.verification_checks = [VerificationCheck.model_validate(check)
+                                  for check in payload["verification_checks"]]
+    unresolved = unresolved_descriptions(payload["verification_checks"])
     report.leading_hypothesis.verification_needed = list(dict.fromkeys([
-        *report.leading_hypothesis.verification_needed, *verification_needed,
+        *report.leading_hypothesis.verification_needed, *verification_needed, *unresolved,
     ]))
+    report.missing_information = list(dict.fromkeys([*report.missing_information, *unresolved]))
     override = cap_confidence(report)
     if override:
         metadata["confidence_override"] = override
@@ -149,7 +164,7 @@ def generate_report(question, evidence, collection_errors, on_progress=None, ver
             on_progress(metadata)
 
     try:
-        validate_report(report, payload["evidence"])
+        validate_report(report, payload["evidence"], verification_checks=payload["verification_checks"])
         if collection_errors and not report.missing_information:
             raise ValueError("Rejected report: collection limitations were omitted")
     except ValueError as exc:

@@ -148,7 +148,8 @@ def generate_structured(instructions: str, content: str, schema: type[BaseModel]
             raise RuntimeError("Missing provider credential")
 
         # A caller may have built its payload before dotenv was loaded.
-        content = json.dumps(redact(json.loads(content))[0], allow_nan=False)
+        content = json.dumps(redact(json.loads(content))[0], allow_nan=False,
+                             ensure_ascii=False, separators=(",", ":"))
         instructions, _ = redact(instructions)
         options = {}
         if provider == "openrouter":

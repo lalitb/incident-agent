@@ -11,7 +11,7 @@ from unittest.mock import patch
 from dotenv import load_dotenv
 
 from agent import diagnose, llm
-from agent.controller import Decision
+from agent.controller import Decision, ReviewDecision
 from agent.model import ReportValidationError
 from agent.remediate import review_action
 from agent.run_records import model_usage
@@ -168,6 +168,20 @@ class ModelTests(unittest.TestCase):
         self.assertNotIn("other-secret", messages)
         json.loads(provider.call_args.kwargs["messages"][1]["content"])
 
+    def test_provider_preserves_compact_utf8_context_encoding(self):
+        response = SimpleNamespace(choices=[SimpleNamespace(
+            finish_reason="stop", message=SimpleNamespace(content=decision(action="finish").model_dump_json()))],
+            usage=None)
+        content = json.dumps({"question": "\u00e9" * 100, "rows": [[1, 2, 3]]},
+                             ensure_ascii=False, separators=(",", ":"))
+        with patch("agent.llm.load_environment"), patch.dict(os.environ, {
+            "LLM_MODEL": "gemini/gemini-2.5-flash-lite", "GEMINI_API_KEY": "fake-key"
+        }), patch("agent.llm.completion", return_value=response) as provider:
+            llm.generate_structured("Choose a tool", content, Decision)
+        sent = provider.call_args.kwargs["messages"][1]["content"]
+        self.assertEqual(sent, content)
+        self.assertEqual(len(sent.encode("utf-8")), len(content.encode("utf-8")))
+
     def test_dotenv_does_not_override_environment(self):
         with tempfile.TemporaryDirectory() as directory:
             env_file = Path(directory) / ".env"
@@ -251,7 +265,8 @@ class RunTests(unittest.TestCase):
                  patch("agent.gateway.ToolGateway.execute", side_effect=collect), \
                  patch("agent.controller.generate_structured", side_effect=[
                      (decision(request("query_metrics", metric="request_rate")), {}),
-                     (decision(action="finish"), {})]), \
+                     (decision(action="finish"), {}),
+                     (ReviewDecision(reason="No specific missing check", missing_check=None), {})]), \
                  patch("agent.model.generate_structured", side_effect=lambda **kwargs: (report(collected), {})), \
                  contextlib.redirect_stdout(io.StringIO()):
                 diagnose.main(["--start", START, "--end", END, *(["--adaptive"] if adaptive else [])])
@@ -260,7 +275,7 @@ class RunTests(unittest.TestCase):
                 saved = json.loads((run_dir / "report.json").read_text())
                 self.assertEqual(state["status"], "completed")
                 self.assertEqual(state["report_status"], "completed")
-                self.assertEqual(saved["model_call"]["prompt_version"], "structured-observations-v1")
+                self.assertEqual(saved["model_call"]["prompt_version"], "structured-observations-v2.1")
 
     def test_collection_requires_explicit_window_before_creating_a_run(self):
         with tempfile.TemporaryDirectory() as directory, patch(
@@ -364,7 +379,8 @@ class RunTests(unittest.TestCase):
         query = decision(request("query_metrics", metric="request_rate"))
         with tempfile.TemporaryDirectory() as directory, patch(
             "agent.controller.generate_structured", side_effect=[
-                (query, {}), (query, {}), (decision(action="finish"), {})]):
+                (query, {}), (query, {}), (decision(action="finish"), {}),
+                (ReviewDecision(reason="No specific missing check", missing_check=None), {})]):
             run_dir, state, _, calls = self.run_main(directory, ["--adaptive"], self.response,
                                                     (report(), {"usage": None}))
             self.assertEqual(state["status"], "completed")

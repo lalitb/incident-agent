@@ -18,7 +18,10 @@ MAX_RESPONSE_BYTES = 2_000_000
 
 
 class ToolError(RuntimeError):
-    pass
+    def __init__(self, message="The backend query failed.", *, code="backend_error", retryable=False):
+        super().__init__(message)
+        self.code = code
+        self.retryable = retryable
 
 
 def validate_service(service):
@@ -72,33 +75,28 @@ def fetch_json(backend, path, params=None):
         code = exc.code
         exc.close()
         raise ToolError(
-            f"{backend} returned HTTP {code} for {path}"
-        ) from exc
+            code="backend_unavailable" if code in {408, 429, 500, 502, 503, 504} else "backend_rejected",
+            retryable=code in {408, 429, 500, 502, 503, 504},
+        ) from None
 
-    except (URLError, TimeoutError, OSError) as exc:
-        raise ToolError(
-            f"Cannot query {backend}: {exc}"
-        ) from exc
+    except (URLError, TimeoutError, OSError):
+        raise ToolError(code="backend_unavailable", retryable=True) from None
 
     if len(body) > MAX_RESPONSE_BYTES:
-        raise ToolError(
-            f"{backend} response exceeded the size limit"
-        )
+        raise ToolError(code="response_too_large")
 
     try:
         result = json.loads(body)
-    except (ValueError, UnicodeDecodeError) as exc:
-        raise ToolError(
-            f"{backend} returned invalid JSON"
-        ) from exc
+    except (ValueError, UnicodeDecodeError):
+        raise ToolError(code="invalid_backend_data") from None
 
     if not isinstance(result, dict):
-        raise ToolError(f"{backend} returned an unexpected response")
+        raise ToolError(code="invalid_backend_data")
 
     if result.get("status") == "error":
-        raise ToolError(
-            f"{backend} query failed: {result.get('error', 'unknown error')}"
-        )
+        # Classify the documented Prometheus error type, never the response text.
+        retryable = result.get("errorType") in {"timeout", "canceled", "unavailable"}
+        raise ToolError(code="backend_error", retryable=retryable)
 
     return result
 

@@ -198,7 +198,8 @@ def main(argv=None):
 
     try:
         report = IncidentReport.model_validate(saved["report"])
-        validate_report(report, items)
+        checks = evidence_file.get("verification_checks")
+        validate_report(report, items, verification_checks=list(checks.values()) if checks is not None else None)
     except ValueError as exc:
         print("FAIL:", redact(str(exc))[0][:2000])
         raise SystemExit(1) from None

@@ -3,7 +3,7 @@ import json
 import unittest
 from unittest.mock import patch
 
-from agent.controller import Decision, run_investigation
+from agent.controller import Decision, previous_attempts, query_fingerprint, run_investigation
 from agent.llm import ModelCallError, ModelResponseError
 from tests.fixtures import BASE, TRACE_ID, metric, search, trace
 
@@ -18,10 +18,11 @@ def decision(*requests, action="query"):
 
 
 class ControllerTests(unittest.TestCase):
-    def run_decisions(self, decisions, *, failed_tools=False):
+    def run_decisions(self, decisions, *, failed_tools=False, outcomes=None):
         state = {"decisions": [], "stop_reason": None}
         evidence, errors, calls, snapshots, contexts = [], [], [], [], []
         sequence = iter(decisions)
+        outcomes = iter(outcomes) if outcomes is not None else None
 
         def planner(**kwargs):
             contexts.append(json.loads(kwargs["content"]))
@@ -31,17 +32,30 @@ class ControllerTests(unittest.TestCase):
             return next_decision, {"provider": "mock", "usage": None}
 
         def collect(tool, **arguments):
-            calls.append({"tool": tool, "arguments": {**BASE, **arguments}})
-            if failed_tools:
-                errors.append({"tool": tool, "error": {"code": "backend_error"}})
+            call = {"tool": tool, "arguments": {**BASE, **arguments},
+                    "attempt": len(previous_attempts(tool, arguments, calls)) + 1,
+                    "attempt_id": f"tool-{len(calls) + 1:03d}",
+                    "fingerprint": query_fingerprint(tool, arguments)}
+            calls.append(call)
+            outcome = next(outcomes) if outcomes is not None else "permanent" if failed_tools else "success"
+            if outcome in {"permanent", "retryable"}:
+                error = {"code": "backend_error", "retryable": outcome == "retryable"}
+                call.update(ok=False, status="failed", error=error)
+                errors.append({"tool": tool, "error": error})
+                return
             elif tool == "find_traces":
-                evidence.append(search())
+                item = search()
             elif tool == "get_trace":
-                evidence.append(trace())
+                item = trace()
             elif tool == "query_metrics":
-                evidence.append(metric(arguments["metric"], [1]))
+                item = metric(arguments["metric"], [1])
             else:
-                evidence.append({"tool": tool, "evidence_id": "logs", "data": []})
+                item = {"tool": tool, "evidence_id": f"logs-{len(calls)}", "data": []}
+            if outcome == "empty":
+                item["data"] = []
+            evidence.append(item)
+            call.update(ok=True, status="completed", evidence_id=item["evidence_id"])
+            return item
 
         with patch("agent.controller.generate_structured", side_effect=planner):
             run_investigation(question="Explain latency", base=BASE, evidence=evidence,
@@ -115,6 +129,8 @@ class ControllerTests(unittest.TestCase):
             state, calls, _, contexts = self.run_decisions([])
         self.assertEqual(state["stop_reason"], "context_budget")
         self.assertEqual(contexts, [])
+        self.assertEqual(state["context_records"][0]["status"], "over_limit_not_sent")
+        self.assertEqual(state["decisions"], [])
 
     def test_provider_error_does_not_retry(self):
         with self.assertRaises(ModelCallError):

@@ -64,9 +64,30 @@ class TimelineObservation(StrictModel):
         "source_timestamp",
         "sample_timestamp",
         "metric_bucket",
-    ]
+    ] = Field(description=(
+        "source_timestamp may cite only search_logs or retrieved get_trace evidence. "
+        "sample_timestamp may cite only query_metrics and must be an actual supplied sample instant. "
+        "metric_bucket may cite only query_metrics and must use supplied bucket boundaries. "
+        "find_traces discovery results are never valid timeline citations, even if they include a timestamp."
+    ))
 
-    evidence_ids: list[str]
+    evidence_ids: list[str] = Field(description="Every citation must have an evidence type allowed by precision; never cite find_traces here.")
+
+
+class VerificationCheck(StrictModel):
+    check_id: str
+    claim: str
+    tool: Literal["query_metrics", "search_logs", "find_traces", "get_trace"]
+    metric: str | None
+    status: Literal["pending", "resolved", "unresolvable"] = "pending"
+    reason: str | None = None
+    evidence_ids: list[str] = Field(default_factory=list)
+    explanation: str | None = None
+    metric_measurements: list[MetricMeasurement] = Field(default_factory=list)
+    trace_breakdowns: list[TraceBreakdown] = Field(default_factory=list)
+    flagged_step: int
+    source: Literal["planner", "review"] = "planner"
+    validation: dict[str, str] = Field(default_factory=dict)
 
 
 class IncidentReport(StrictModel):
@@ -95,3 +116,7 @@ class IncidentReport(StrictModel):
     )
     missing_information: list[str]
     recommended_next_steps: list[str]
+    verification_checks: list[VerificationCheck] = Field(
+        default_factory=list,
+        description="Controller-owned check history; the application replaces this field, not the model.",
+    )

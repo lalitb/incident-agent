@@ -227,13 +227,15 @@ class ToolGateway:
     def execute(self, tool_name, arguments):
         started = perf_counter()
 
-        def failure(code, message):
+        def failure(code, message, retryable=False):
             # Do not echo raw arguments or backend exception messages.
             return {
                 "ok": False,
                 "error": {
                     "code": code,
                     "message": message,
+                    "retryable": retryable,
+                    "classification": "retryable" if retryable else "permanent",
                 },
                 "elapsed_ms": round(
                     (perf_counter() - started) * 1000, 2
@@ -249,11 +251,15 @@ class ToolGateway:
 
         try:
             raw_result = function(**validated)
-        except ToolError:
+        except ToolError as exc:
             return failure(
-                "backend_error",
+                exc.code if exc.code in {
+                    "backend_error", "backend_unavailable", "backend_rejected",
+                    "response_too_large", "invalid_backend_data",
+                } else "backend_error",
                 "The backend query failed. Check backend health, "
                 "the time window and whether the trace exists.",
+                retryable=exc.retryable is True,
             )
         except ValueError:
             return failure(

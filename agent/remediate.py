@@ -3,6 +3,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .checkpoint import run_lock, write_checkpoint
 from .gateway import redact
 from .llm import load_environment
 from .run_records import save_json
@@ -16,7 +17,9 @@ def review_action(run_directory, choice="not_requested"):
     saved = redact(json.loads((run_directory / "report.json").read_text()))[0]
     evidence = redact(json.loads((run_directory / "evidence.json").read_text()))[0]
     report = IncidentReport.model_validate(saved["report"])
-    validate_report(report, evidence["evidence"])
+    checks = evidence.get("verification_checks")
+    validate_report(report, evidence["evidence"],
+                    verification_checks=list(checks.values()) if checks is not None else None)
     if not report.recommended_next_steps:
         raise ValueError("The report has no proposed next step")
 
@@ -29,12 +32,18 @@ def review_action(run_directory, choice="not_requested"):
         "reviewed_at": datetime.now(timezone.utc).isoformat(),
     }
     # The action remains text. Approval can only write this local record.
-    record = save_json(run_directory / "remediation.json", record)
-    controller_file = run_directory / "controller.json"
-    if controller_file.exists():
-        state = json.loads(controller_file.read_text())
-        state["remediation_status"] = choice
-        save_json(controller_file, state)
+    with run_lock(run_directory):
+        record = save_json(run_directory / "remediation.json", record)
+        checkpoint_file = run_directory / "checkpoint.json"
+        controller_file = run_directory / "controller.json"
+        if checkpoint_file.exists():
+            run = json.loads(checkpoint_file.read_text())
+            run["state"]["remediation_status"] = choice
+            write_checkpoint(run_directory, run)
+        elif controller_file.exists():
+            state = json.loads(controller_file.read_text())
+            state["remediation_status"] = choice
+            save_json(controller_file, state)
     return record
 
 

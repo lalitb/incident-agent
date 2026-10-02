@@ -92,7 +92,29 @@ def validate_timeline(observation, sources):
             require(start.timestamp() in timestamps, "sample timestamp is absent from its evidence")
 
 
-def validate_report(report: IncidentReport, evidence):
+def validate_trace_breakdown(breakdown, item):
+    require(item["tool"] == "get_trace", "span measurements require retrieved trace evidence")
+    require(breakdown.trace_id == item["trace_id"], "trace ID does not match its evidence")
+    actual_spans = {span["span_id"]: span for span in item["data"]}
+    reported_ids = [span.span_id for span in breakdown.spans]
+    require(len(reported_ids) == len(set(reported_ids)), "duplicate spans in a trace breakdown")
+    require(set(reported_ids) == set(actual_spans), "trace breakdown omitted or invented retrieved spans")
+    for span in breakdown.spans:
+        actual = actual_spans[span.span_id]
+        require(span.name == actual["name"], "span name does not match its evidence")
+        require(math.isfinite(span.duration_ms) and math.isclose(
+            span.duration_ms, actual["duration_ms"], rel_tol=0, abs_tol=0.01),
+            "span duration differs from its evidence")
+
+
+def usable_evidence(item):
+    if item["tool"] == "query_metrics":
+        return any(type(point["value"]) in (int, float) and math.isfinite(point["value"])
+                   for series in item["data"] for point in series["points"])
+    return bool(item["data"])
+
+
+def validate_report(report: IncidentReport, evidence, verification_checks=None):
     by_id = {item["evidence_id"]: item for item in evidence}
     require(len(by_id) == len(evidence), "duplicate evidence IDs")
 
@@ -110,6 +132,10 @@ def validate_report(report: IncidentReport, evidence):
         for evidence_id in finding.evidence_ids:
             lookup(evidence_id)
 
+    if report.assessment == "likely_cause_identified":
+        require(any(usable_evidence(lookup(identifier))
+                    for identifier in report.leading_hypothesis.evidence_ids),
+                "a causal hypothesis needs usable cited evidence, not empty results")
     if report.assessment == "insufficient_evidence":
         require(report.confidence == "low", "insufficient evidence requires low confidence")
     if report.confidence == "high":
@@ -147,21 +173,30 @@ def validate_report(report: IncidentReport, evidence):
     reported_traces = set()
     for breakdown in report.trace_breakdowns:
         item = lookup(breakdown.evidence_id, "get_trace")
-        require(breakdown.trace_id == item["trace_id"], "trace ID does not match its evidence")
-        actual_spans = {span["span_id"]: span for span in item["data"]}
-        reported_ids = [span.span_id for span in breakdown.spans]
-        require(len(reported_ids) == len(set(reported_ids)), "duplicate spans in a trace breakdown")
-        require(set(reported_ids) == set(actual_spans), "trace breakdown omitted or invented retrieved spans")
-        for span in breakdown.spans:
-            actual = actual_spans[span.span_id]
-            require(span.name == actual["name"], "span name does not match its evidence")
-            require(math.isfinite(span.duration_ms) and math.isclose(
-                span.duration_ms, actual["duration_ms"], rel_tol=0, abs_tol=0.01),
-                "span duration differs from its evidence")
+        validate_trace_breakdown(breakdown, item)
         reported_traces.add(breakdown.evidence_id)
     require(expected_traces <= reported_traces, "a retrieved trace was omitted from the breakdowns")
 
     for observation in report.timeline_observations:
         require(bool(observation.evidence_ids), "timeline observation has no citations")
         validate_timeline(observation, [lookup(identifier) for identifier in observation.evidence_ids])
+    # Imported here to keep shared measurement validators independent of controller schemas.
+    from .verification import VerificationResolution, unresolved_descriptions, validate_resolution
+
+    check_ids = [check.check_id for check in report.verification_checks]
+    if verification_checks is not None:
+        require([check.model_dump() for check in report.verification_checks] == verification_checks,
+                "controller verification history was changed or omitted")
+    require(len(check_ids) == len(set(check_ids)), "duplicate verification check IDs")
+    for check in report.verification_checks:
+        if check.status == "resolved":
+            resolution = VerificationResolution.model_validate({
+                key: check.model_dump()[key] for key in VerificationResolution.model_fields
+            })
+            validate_resolution(check.model_dump(), resolution, evidence)
+        elif check.status == "unresolvable":
+            require(bool(check.reason and check.reason.strip()), "unresolvable check needs a reason")
+    gaps = unresolved_descriptions([check.model_dump() for check in report.verification_checks])
+    require(set(gaps) <= set(report.leading_hypothesis.verification_needed),
+            "unresolved controller checks were omitted")
     # Narrative interpretations and recommendations require human review.

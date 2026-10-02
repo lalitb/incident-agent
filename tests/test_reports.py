@@ -7,10 +7,10 @@ from unittest.mock import patch
 from pydantic import ValidationError
 
 from agent.model import ReportValidationError, generate_report
-from agent.schemas import IncidentReport
+from agent.schemas import IncidentReport, TimelineObservation
 from agent.summarize import summarize_evidence
 from agent.validate_report import validate_report
-from tests.fixtures import TIMESTAMP, incident, metric, report
+from tests.fixtures import TIMESTAMP, incident, metric, report, search
 
 
 class ReportTests(unittest.TestCase):
@@ -24,7 +24,25 @@ class ReportTests(unittest.TestCase):
         self.assertEqual(model.call_args.kwargs["max_tokens"], 8192)
         self.assertEqual(payload["evidence"][0]["data"][1]["observed_values"], [2])
         self.assertEqual(result.trace_breakdowns[0].spans[1].duration_ms, 833.456)
-        self.assertEqual(metadata["prompt_version"], "structured-observations-v1")
+        self.assertEqual(metadata["prompt_version"], "structured-observations-v2.1")
+
+    def test_timeline_schema_explains_evidence_types_without_admitting_discovery(self):
+        description = TimelineObservation.model_json_schema()["properties"]["precision"]["description"]
+        for term in ("source_timestamp", "sample_timestamp", "metric_bucket", "search_logs",
+                     "get_trace", "query_metrics", "find_traces", "never valid timeline citations"):
+            self.assertIn(term, description)
+        item = search()
+        item["data"][0]["start_time_unix_nano"] = str(TIMESTAMP * 10**9)
+        for precision in ("source_timestamp", "sample_timestamp", "metric_bucket"):
+            candidate = report([item])
+            candidate.timeline_observations = [TimelineObservation(
+                statement="Discovery timestamp is not an eligible timeline source.",
+                start_utc="2026-09-19T10:30:00Z",
+                end_utc="2026-09-19T10:31:00Z" if precision == "metric_bucket" else "2026-09-19T10:30:00Z",
+                precision=precision, evidence_ids=[item["evidence_id"]],
+            )]
+            with self.subTest(precision=precision), self.assertRaisesRegex(ValueError, "must cite"):
+                validate_report(candidate, [item])
 
     def test_readable_source_timestamps_preserve_precision_and_original_evidence(self):
         evidence = [
