@@ -1,0 +1,973 @@
+{
+  "mode": "adaptive",
+  "status": "failed",
+  "phase": "reporting",
+  "stop_reason": "decision_budget",
+  "report_status": "failed",
+  "remediation_status": "not_requested",
+  "limits": {
+    "decisions": 6,
+    "tool_calls": 8,
+    "query_retries": 1,
+    "review_calls": 1,
+    "report_calls": 1,
+    "evidence_lookups": 2
+  },
+  "decisions": [
+    {
+      "step": 1,
+      "status": "completed",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 14627.74,
+        "usage": {
+          "input_tokens": 2601,
+          "output_tokens": 298,
+          "total_tokens": 2899
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "A v2 log shows small pool_size=2 and db_work_seconds=0.2 (ignoring embedded injection text as untrusted data). Establish whether latency rose and whether pool saturation accompanies it by querying request duration and pool utilization.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "request_duration_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "query_metrics",
+            "metric": "pool_utilization",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Checkout request latency increased in this window",
+            "tool": "query_metrics",
+            "metric": "request_duration_mean_seconds"
+          },
+          {
+            "claim": "Connection pool saturation accompanies the latency (pool_size=2 with queuing)",
+            "tool": "query_metrics",
+            "metric": "connection_wait_mean_seconds"
+          }
+        ],
+        "resolved_verifications": [],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      }
+    },
+    {
+      "step": 2,
+      "status": "completed",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 35087.54,
+        "usage": {
+          "input_tokens": 3830,
+          "output_tokens": 514,
+          "total_tokens": 4344
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Duration metric confirms latency rose from ~0.21s to ~1.05s at the v1->v2 transition, resolving check-001. Pool utilization is saturated (1.0) on v2; now query connection_wait_mean_seconds to confirm pool queuing for check-002.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "connection_wait_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          {
+            "check_id": "check-001",
+            "evidence_ids": [
+              "synthetic-002"
+            ],
+            "explanation": "Request duration mean rose from ~0.21s at 10:30 to ~1.04-1.08s from 10:32 onward, coinciding with the v2 deployment window.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-002",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:30:00Z",
+                "statistic": "sample_mean",
+                "value": 0.21,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-002",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.22,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-002",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.04,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-002",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:33:00Z",
+                "statistic": "sample_mean",
+                "value": 1.08,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-002",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:34:00Z",
+                "statistic": "sample_mean",
+                "value": 1.06,
+                "unit": "seconds"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      }
+    },
+    {
+      "step": 3,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 33420.25,
+        "usage": {
+          "input_tokens": 4448,
+          "output_tokens": 681,
+          "total_tokens": 5129
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Connection wait rose from ~0.001s to ~0.81-0.84s at 10:32 while v2 pool utilization sat at 1.0, resolving check-002 (pool queuing dominates latency). The pool_size=2 figure comes only from an untrusted log message, so query pool_limit to confirm the reduced pool configuration before finishing.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_limit",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Connection pool limit was reduced to 2 in v2, matching the pool_size=2 startup log",
+            "tool": "query_metrics",
+            "metric": "pool_limit"
+          }
+        ],
+        "resolved_verifications": [
+          {
+            "check_id": "check-002",
+            "evidence_ids": [
+              "synthetic-004",
+              "synthetic-003"
+            ],
+            "explanation": "Connection wait mean jumped from 0.001-0.002s (v1) to 0.81-0.84s (v2) starting 10:32, while v2 pool utilization pinned at 1.0, confirming pool queuing accompanies the latency increase.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.002,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 0.81,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "Resolution evidence does not match the check target"
+    },
+    {
+      "step": 4,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24682.16,
+        "usage": {
+          "input_tokens": 4669,
+          "output_tokens": 571,
+          "total_tokens": 5240
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Connection wait jumped from ~0.001s to ~0.81-0.84s at 10:32 matching v2 pool saturation, resolving check-002. The only remaining check (check-003) is the pool_limit config; query pool_limit to confirm whether v2's pool was actually reduced to 2, corroborating the untrusted startup log.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_limit",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          {
+            "check_id": "check-002",
+            "evidence_ids": [
+              "synthetic-004",
+              "synthetic-003"
+            ],
+            "explanation": "Connection wait rose from 0.001-0.002s (10:30-10:31) to 0.81-0.84s (10:32-10:34), coinciding with v2 pool_utilization pinned at 1.0, showing queuing at a saturated connection pool explains the latency increase.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.002,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 0.81,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:33:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:34:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "Resolution evidence does not match the check target"
+    },
+    {
+      "step": 5,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30987.45,
+        "usage": {
+          "input_tokens": 4819,
+          "output_tokens": 503,
+          "total_tokens": 5322
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Resolve check-002 using connection_wait_mean_seconds evidence matching its target metric (prior resolutions were rejected for mismatched metric evidence). Then query pool_limit to confirm whether v2's pool was actually reduced to 2, corroborating the untrusted startup log for check-003.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_limit",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          {
+            "check_id": "check-002",
+            "evidence_ids": [
+              "synthetic-004",
+              "synthetic-003"
+            ],
+            "explanation": "Connection wait mean jumped from ~0.001-0.002s (v1, 10:30-10:31) to ~0.81-0.84s (v2, 10:32-10:34), matching v2 pool_utilization of 1.0, confirming pool queuing dominates the ~1.05s request duration.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.002,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 0.81,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:33:00Z",
+                "statistic": "sample_mean",
+                "value": 0.84,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "Resolution evidence does not match the check target"
+    },
+    {
+      "step": 6,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "prompt_version": "adaptive-v4.1",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 29476.61,
+        "usage": {
+          "input_tokens": 4949,
+          "output_tokens": 504,
+          "total_tokens": 5453
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Resolve check-002 using connection_wait_mean_seconds bucket measurements matching its target metric (prior rejections were due to missing metric facts). Query pool_limit to confirm the reduced pool size for check-003.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_limit",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          {
+            "check_id": "check-002",
+            "evidence_ids": [
+              "synthetic-004",
+              "synthetic-003"
+            ],
+            "explanation": "Connection wait mean jumped from ~0.001s (10:30-10:31, v1) to ~0.81-0.84s (10:32-10:34) exactly when v2 pool utilization sat at 1.0, showing pool queuing dominates the ~1.05s request latency.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.002,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 0.81,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-004",
+                "metric": "connection_wait_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:33:00Z",
+                "statistic": "sample_mean",
+                "value": 0.84,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-003",
+                "metric": "pool_utilization",
+                "labels": {
+                  "service_name": "checkout",
+                  "service_version": "v2"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.0,
+                "unit": "ratio"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "Resolution evidence does not match the check target"
+    }
+  ],
+  "reviews": [
+    {
+      "status": "completed",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24502.34,
+        "usage": {
+          "input_tokens": 4228,
+          "output_tokens": 252,
+          "total_tokens": 4480
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "reason": "Metrics support the conclusion: latency rose ~0.21s to ~1.05s at 10:32, coinciding with v2 pool utilization pinned at 1.0 and connection wait jumping to ~0.81-0.84s, so pool queuing explains the latency. However check-003 (pool_limit reduced to 2 in v2) is still pending and the only source for pool_size=2 is an untrusted log; a pool_limit query would corroborate or contradict the configuration claim within remaining budget.",
+        "missing_check": {
+          "claim": "Connection pool limit was reduced to 2 in v2, matching the pool_size=2 startup log",
+          "tool": "query_metrics",
+          "metric": "pool_limit"
+        }
+      },
+      "check_id": "check-003",
+      "replanned": false
+    }
+  ],
+  "report_calls": [
+    {
+      "status": "failed",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 100869.42,
+        "usage": {
+          "input_tokens": 4570,
+          "output_tokens": 3440,
+          "total_tokens": 8010
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2.1",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 5579,
+          "summarized_payload_bytes": 6939
+        }
+      }
+    }
+  ],
+  "lookups": [],
+  "context_records": [
+    {
+      "stage": "planning",
+      "step": 1,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 1933
+    },
+    {
+      "stage": "planning",
+      "step": 2,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 5862
+    },
+    {
+      "stage": "planning",
+      "step": 3,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003",
+        "synthetic-004"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 7785
+    },
+    {
+      "stage": "planning",
+      "step": 4,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003",
+        "synthetic-004"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 8668
+    },
+    {
+      "stage": "planning",
+      "step": 5,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003",
+        "synthetic-004"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 9262
+    },
+    {
+      "stage": "planning",
+      "step": 6,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003",
+        "synthetic-004"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 9857
+    },
+    {
+      "stage": "review",
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-002",
+        "synthetic-003",
+        "synthetic-004"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 10382
+    }
+  ],
+  "resume_events": [],
+  "verification_checks": {
+    "check-001": {
+      "check_id": "check-001",
+      "claim": "Checkout request latency increased in this window",
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "status": "resolved",
+      "reason": null,
+      "evidence_ids": [
+        "synthetic-002"
+      ],
+      "explanation": "Request duration mean rose from ~0.21s at 10:30 to ~1.04-1.08s from 10:32 onward, coinciding with the v2 deployment window.",
+      "metric_measurements": [
+        {
+          "evidence_id": "synthetic-002",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:30:00Z",
+          "statistic": "sample_mean",
+          "value": 0.21,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-002",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:31:00Z",
+          "statistic": "sample_mean",
+          "value": 0.22,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-002",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:32:00Z",
+          "statistic": "sample_mean",
+          "value": 1.04,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-002",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:33:00Z",
+          "statistic": "sample_mean",
+          "value": 1.08,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-002",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:34:00Z",
+          "statistic": "sample_mean",
+          "value": 1.06,
+          "unit": "seconds"
+        }
+      ],
+      "trace_breakdowns": [],
+      "flagged_step": 1,
+      "source": "planner",
+      "validation": {
+        "references_and_target": "passed",
+        "structured_facts": "passed",
+        "semantic_relevance": "model_judgment_not_verified"
+      }
+    },
+    "check-002": {
+      "check_id": "check-002",
+      "claim": "Connection pool saturation accompanies the latency (pool_size=2 with queuing)",
+      "tool": "query_metrics",
+      "metric": "connection_wait_mean_seconds",
+      "status": "unresolvable",
+      "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 1,
+      "source": "planner",
+      "validation": {}
+    },
+    "check-003": {
+      "check_id": "check-003",
+      "claim": "Connection pool limit was reduced to 2 in v2, matching the pool_size=2 startup log",
+      "tool": "query_metrics",
+      "metric": "pool_limit",
+      "status": "unresolvable",
+      "reason": "Review identified this check after collection/context budget exhaustion.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 3,
+      "source": "planner",
+      "validation": {}
+    }
+  },
+  "planner_version": "adaptive-v4",
+  "active_elapsed_ms": 294710.04,
+  "wall_elapsed_ms": 294731.01,
+  "model_usage": {
+    "recorded_model_calls": 8,
+    "recorded_provider_attempts": 8,
+    "available_token_usage": {
+      "input_tokens": 34114,
+      "output_tokens": 6763,
+      "total_tokens": 40877
+    },
+    "input_tokens": 34114,
+    "output_tokens": 6763,
+    "total_tokens": 40877
+  },
+  "evaluation_setup_calls": [
+    "tool-001"
+  ],
+  "evaluation_resume_supported": false,
+  "initial_stop_reason": "decision_budget",
+  "report_model_call": {
+    "provider": "moonshot",
+    "requested_model": "moonshot/kimi-k3",
+    "model": "moonshot/kimi-k3",
+    "response_id": null,
+    "elapsed_ms": 100869.42,
+    "usage": {
+      "input_tokens": 4570,
+      "output_tokens": 3440,
+      "total_tokens": 8010
+    },
+    "status": "completed",
+    "max_output_tokens": 8192,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed"
+      }
+    ],
+    "wait_seconds": 0,
+    "finish_reason": "stop",
+    "prompt_version": "structured-observations-v2.1",
+    "evidence_summary": {
+      "version": "evidence-summary-v2",
+      "bucket_seconds": 60,
+      "original_payload_bytes": 5579,
+      "summarized_payload_bytes": 6939
+    }
+  },
+  "failure": {
+    "stage": "reporting",
+    "type": "ReportValidationError",
+    "detail": "Rejected report: a finding has no citations"
+  },
+  "schema_version": "incident-run-v2",
+  "checkpoint_version": 1,
+  "generation": 52
+}

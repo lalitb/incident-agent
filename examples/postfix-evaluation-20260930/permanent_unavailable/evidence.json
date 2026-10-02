@@ -1,0 +1,575 @@
+{
+  "run_id": "78febcd7ea484bc1a4d1542e88855f07",
+  "created_at": "2026-09-30T02:44:24.435813+00:00",
+  "question": "What explains checkout latency in this window, using only the returned synthetic telemetry?",
+  "service": "checkout",
+  "window": {
+    "start": "2026-09-19T10:30:00Z",
+    "end": "2026-09-19T10:35:00Z"
+  },
+  "evidence": [
+    {
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 0.21
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 0.22
+            },
+            {
+              "timestamp": 1789813930,
+              "value": 1.04
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 1.08
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 1.06
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-001",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "request_duration_mean_seconds",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "request_rate",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 40.0
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 40.0
+            },
+            {
+              "timestamp": 1789813930,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 10.0
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-002",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "request_rate",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "connection_wait_mean_seconds",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 0.001
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 0.002
+            },
+            {
+              "timestamp": 1789813930,
+              "value": 0.81
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 0.84
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 0.82
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-003",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "connection_wait_mean_seconds",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "pool_utilization",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 0.6
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 0.7
+            }
+          ]
+        },
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "points": [
+            {
+              "timestamp": 1789813930,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 1.0
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-004",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "pool_utilization",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "pool_limit",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 10.0
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 10.0
+            }
+          ]
+        },
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "points": [
+            {
+              "timestamp": 1789813930,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 2.0
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 2.0
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-005",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "pool_limit",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "search_logs",
+      "data": [
+        {
+          "timestamp_unix_nano": "1789813930000000000",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "message": "Checkout started: pool_size=2 db_work_seconds=0.2"
+        },
+        {
+          "timestamp_unix_nano": "1789813810000000000",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "message": "Checkout started: pool_size=10 db_work_seconds=0.2"
+        }
+      ],
+      "evidence_id": "synthetic-006",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "contains": "pool",
+        "limit": 5
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "find_traces",
+      "data": [
+        {
+          "trace_id": "00000000000000000000000000000001",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789813990000000000",
+          "duration_ms": 1060.123
+        }
+      ],
+      "selection": "Synthetic limited matches, not a population sample or slowest ranking",
+      "evidence_id": "synthetic-007",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "min_duration_ms": 800,
+        "limit": 1
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true,
+      "collection_selection": "harness_selected"
+    }
+  ],
+  "collection_errors": [
+    {
+      "tool": "get_trace",
+      "attempt_id": "tool-008",
+      "error": {
+        "code": "backend_unavailable",
+        "message": "The backend query failed. Check backend health, the time window and whether the trace exists.",
+        "retryable": false,
+        "classification": "permanent"
+      },
+      "selection": "harness_selected"
+    }
+  ],
+  "calls": [
+    {
+      "attempt_id": "tool-001",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "request_duration_mean_seconds"
+      },
+      "fingerprint": "ba5ebbfa1a8ab82408786b0739ee393e9828836ace6a19f44559b58988ec9b43",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:44:34.312707+00:00",
+      "decision_step": 1,
+      "ok": true,
+      "elapsed_ms": 0.51,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 687
+      },
+      "evidence_id": "synthetic-001"
+    },
+    {
+      "attempt_id": "tool-002",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "request_rate"
+      },
+      "fingerprint": "4fddc3da894385c139891298e518b817ec345031edf1f32567de962312597043",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:44:34.352326+00:00",
+      "decision_step": 1,
+      "ok": true,
+      "elapsed_ms": 0.48,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 653
+      },
+      "evidence_id": "synthetic-002"
+    },
+    {
+      "attempt_id": "tool-003",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "connection_wait_mean_seconds"
+      },
+      "fingerprint": "11409fae2d3d5b90530d5bcc0ccbd36cb14bc484de0843b43b86abc8274cca65",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:45:07.395632+00:00",
+      "decision_step": 2,
+      "ok": true,
+      "elapsed_ms": 0.56,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 687
+      },
+      "evidence_id": "synthetic-003"
+    },
+    {
+      "attempt_id": "tool-004",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "pool_utilization"
+      },
+      "fingerprint": "0d131aafeb892b128f1828a8395e22112bf3daa9f33ad9dfa87c044845d7250a",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:45:07.437433+00:00",
+      "decision_step": 2,
+      "ok": true,
+      "elapsed_ms": 0.61,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 760
+      },
+      "evidence_id": "synthetic-004"
+    },
+    {
+      "attempt_id": "tool-005",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "pool_limit"
+      },
+      "fingerprint": "c67ef0843b409c5afcd6e089535d0610b7bb5b84bcd2de46c591d2eef97ace50",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:45:38.187116+00:00",
+      "decision_step": 3,
+      "ok": true,
+      "elapsed_ms": 0.6,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 750
+      },
+      "evidence_id": "synthetic-005"
+    },
+    {
+      "attempt_id": "tool-006",
+      "tool": "search_logs",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "contains": "pool",
+        "limit": 5
+      },
+      "fingerprint": "f3f529bfb17e9038b141af3b3d71501008ab07bb1b1bde0a0f2351443947af68",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T02:45:38.231845+00:00",
+      "decision_step": 3,
+      "ok": true,
+      "elapsed_ms": 0.58,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 722
+      },
+      "evidence_id": "synthetic-006"
+    },
+    {
+      "attempt_id": "tool-007",
+      "tool": "find_traces",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "min_duration_ms": 800,
+        "limit": 1
+      },
+      "fingerprint": "597d5d03c6979d6ebb626e45c815c2211a905f5efcc5130ab72a71359550f2f5",
+      "attempt": 1,
+      "status": "completed",
+      "started_at": "2026-09-30T02:46:43.102849+00:00",
+      "decision_step": null,
+      "selection": "harness_selected",
+      "setup_phase": "after_normal_collection",
+      "is_retry": false,
+      "ok": true,
+      "elapsed_ms": 0.67,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 638
+      },
+      "evidence_id": "synthetic-007"
+    },
+    {
+      "attempt_id": "tool-008",
+      "tool": "get_trace",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "trace_id": "00000000000000000000000000000001"
+      },
+      "fingerprint": "dbb70650f5383af11cd8e53d3f340204ebc94da9fd8505aec92932436a649081",
+      "attempt": 1,
+      "status": "failed",
+      "started_at": "2026-09-30T02:46:43.160008+00:00",
+      "decision_step": null,
+      "selection": "harness_selected",
+      "setup_phase": "after_normal_collection",
+      "is_retry": false,
+      "ok": false,
+      "elapsed_ms": 0.62,
+      "guardrails": null,
+      "error": {
+        "code": "backend_unavailable",
+        "message": "The backend query failed. Check backend health, the time window and whether the trace exists.",
+        "retryable": false,
+        "classification": "permanent"
+      }
+    }
+  ],
+  "checkpoint_version": 1,
+  "schema_version": "incident-run-v2",
+  "generation": 56,
+  "verification_checks": {
+    "check-001": {
+      "check_id": "check-001",
+      "claim": "v2 reduced the connection pool limit, causing saturation and ~0.8s connection wait that explains the latency jump",
+      "tool": "query_metrics",
+      "metric": "pool_limit",
+      "status": "resolved",
+      "reason": null,
+      "evidence_ids": [
+        "synthetic-005"
+      ],
+      "explanation": "pool_limit shows v1 at 10 connections (10:30-10:31) and v2 at 2 connections (10:32-10:34), confirming the v2 pool limit reduction that coincides with pool saturation, ~0.8s connection wait, and the latency jump.",
+      "metric_measurements": [
+        {
+          "evidence_id": "synthetic-005",
+          "metric": "pool_limit",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "bucket_start_utc": "2026-09-19T10:30:00Z",
+          "statistic": "sample_mean",
+          "value": 10.0,
+          "unit": "connections"
+        },
+        {
+          "evidence_id": "synthetic-005",
+          "metric": "pool_limit",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "bucket_start_utc": "2026-09-19T10:32:00Z",
+          "statistic": "sample_mean",
+          "value": 2.0,
+          "unit": "connections"
+        }
+      ],
+      "trace_breakdowns": [],
+      "flagged_step": 3,
+      "source": "planner",
+      "validation": {
+        "references_and_target": "passed",
+        "structured_facts": "passed",
+        "semantic_relevance": "model_judgment_not_verified"
+      }
+    }
+  },
+  "artifact_label": "Synthetic fixture telemetry; actual Kimi responses; sanitized inspection copy."
+}

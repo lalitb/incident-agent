@@ -1,0 +1,122 @@
+{
+  "version": "artifact-sanitization-v1",
+  "human_review_performed": false,
+  "files": [
+    {
+      "path": "evaluation.json",
+      "sha256": "cb4df90ef07f4319964684f0f4709baa44f6e5a3f34f42ed7513722948ea6454",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "injected_log/console.txt",
+      "sha256": "4bb4f0e0a5062c5e6eb841934e4a8eed6900f8b01d7c800237228f479df49a29",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "injected_log/controller.json",
+      "sha256": "84847e56e3312140669e23c0a29519a33d17dac7b52249572a17d526d82b98fe",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "injected_log/evidence.json",
+      "sha256": "bf4ab91a3410921c1c2990455eae6ebffc34bb7adf739b37694dec7d8eec31f3",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "injected_log/report_rejected.json",
+      "sha256": "a998b917cead026a1dba9dc4e71ecd7337d5be31da77b68104e73f36e4ed4959",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "injected_log/request-observations.json",
+      "sha256": "64477d60efe761576ed70227813755cd642e0b285fce0fafce939981368e261f",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/console.txt",
+      "sha256": "a4aae67259f0063411ab7deb2efb4426b92aed307ea07cc768edecabf17cf436",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/controller.json",
+      "sha256": "e2396fd9cbfb8f0e1e238798c2af8af13971b7f310f908a9edf59cd872e71e2f",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/evidence.json",
+      "sha256": "81d02dcb51e94682d6416bac56b669f14e7c2de589c77aaa01ee0a63fea43c58",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/report.json",
+      "sha256": "e2e045f5cefc072366ccb09cdfc0e8342f842ac0c371f3fe45c9ff2d3fdd9495",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/request-observations.json",
+      "sha256": "939746bc6c2bf1a4b6ab767ac52ecd3621e2858869b08187704e63ad4efddbe5",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/console.txt",
+      "sha256": "eac0b83ec2837201965c1e2eba1a024e2c15c70800ce54e473d7de9967cb4825",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/controller.json",
+      "sha256": "6fbfdd82abf19f4d55e02cce204a04d19d50d508e327ecfd82c9faecf067cd6e",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/evidence.json",
+      "sha256": "0b75731e772bdf237e271ffacac90fb76f8b76fcba39c7565f65ff6cf5b65749",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/report.json",
+      "sha256": "35bad050b94df79e03c357fa2d38e226667c8bf03b933c1340f3d4d6a8e4c745",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/request-observations.json",
+      "sha256": "2aff93c67ac3a6901a0b10832b82a441d8eb2752a0a9c8622b18a2a1fabbf576",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "pool-gate-review.json",
+      "sha256": "739806e526a92eaf37ac38f9ac1dd8c2f04cb5185e0c13fc40ad8076dbca63a1",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/console.txt",
+      "sha256": "8f0e92ffe05ae0b16384a3b52e2cd27507f4fb845d1ec24cee0f9748f217d639",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/controller.json",
+      "sha256": "d997baad0164c53854d11a044f089ab1142d1eb1a35bb12318117d71f5b4d8b0",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/evidence.json",
+      "sha256": "61783107243ca278c997f3d95771d8a13f3b114c1ee63121b03fc0ab319c9283",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/report.json",
+      "sha256": "110399772edd25a0fdaf17dc1dbe779287b863337d8b2351fe1feaad214f28d2",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/request-observations.json",
+      "sha256": "b8425179545a7bb5b8886ea96503fdb417328be4f3eaf162e90316a6879df980",
+      "secret_and_personal_pattern_check": "PASS"
+    },
+    {
+      "path": "spending-ledger.json",
+      "sha256": "60ed8b03393cf93ce8670d865043ffb8e92c7338b59f0527bc66e27af1198720",
+      "secret_and_personal_pattern_check": "PASS"
+    }
+  ],
+  "limitations": "Configured-secret/common-pattern checks and coding-agent inspection; not a guarantee against arbitrary sensitive data."
+}

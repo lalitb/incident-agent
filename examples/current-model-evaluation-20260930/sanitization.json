@@ -1,0 +1,115 @@
+{
+  "version": "artifact-sanitization-v1",
+  "human_review_performed": false,
+  "files": [
+    {
+      "path": "evaluation.json",
+      "sha256": "65f8440620b65c72b3fe838f3bf674fa1d716f4801ad139e2ee536621f5793b0",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "injected_log/controller.json",
+      "sha256": "f251c936f6313b06f0da8cc0f82e8bef1808dda17f318ec4e845bacc945bc941",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "injected_log/evidence.json",
+      "sha256": "2e44c08dec4fb48a6de8ae6a5b939ca8ee4636bda4372e622869896011fec7bb",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "injected_log/model-input-observations.json",
+      "sha256": "8693cba9c2c45ef4fe21878a484a22aa911cdb8a6dd96cf858b101ac55a478fd",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "injected_log/report.json",
+      "sha256": "15f1fbe0a6a1283501e8661b7a44abea8f1d2115f332968bfff188fea4f69c20",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/controller.json",
+      "sha256": "4c29848c76c4b552734d7c69eb15b20273e452865fb80d9b9a73ad87d79bcc0b",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/evidence.json",
+      "sha256": "d879017dd93f3f8bb2f0bc1ed6ef73b177d26e7a584d645f4eec42c3859a128b",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/model-input-observations.json",
+      "sha256": "7d60ea4858ee55634e473c469dbb5954eb7faca09b6c94595bb3273d1fe5deb7",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "known_pool_exhaustion/report_rejected.json",
+      "sha256": "5f3e6530fd5dcedc47739edd727b277b4b2204e9040c98efdc28c675dbe1b077",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/controller.json",
+      "sha256": "21bd1f0d02ecd5dcb846bd719e998a6e5d7750ccd8f7af72e4a71b0403bc6230",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/evidence.json",
+      "sha256": "c89cc62576d0e5a79446be48ed1897bcea566af206b5112d16486f13c00d4b2d",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/model-input-observations.json",
+      "sha256": "d1adf91db1997f7fd9c7a12b4f9ea7e2fe330117d1add7b35fb9117f9922b02f",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "permanent_unavailable/report_rejected.json",
+      "sha256": "9279c6fb1f8e077b9164e0fb260a2fafe1bcdef8877c9cb47cb7962b257e9c52",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/controller.json",
+      "sha256": "9dedf137af419564d864972e854d87744002857c7366bc426e74015a162c03a7",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/evidence.json",
+      "sha256": "c48a8e2e2b88c8a7f9ab77602e8e16cf1ec05eb2f87c14f979025d0cc70931d8",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/model-input-observations.json",
+      "sha256": "0ac580c80b2358bb967789d4ef3eac0cab9834128adfe18e79fa804494c4cb7c",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "slow_query_unchanged_pool/report_rejected.json",
+      "sha256": "f5ac751b925d6190ac5afc4a429ccc6ed9df48cab0dfe4a9fdf1d743d452f291",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    },
+    {
+      "path": "spending-ledger.json",
+      "sha256": "b4c343967e509c9f6b2845cd0fee74fbde12f27674457eca094c337a81d5593c",
+      "secret_pattern_check": "PASS",
+      "redaction_idempotence": "PASS"
+    }
+  ],
+  "limitations": "Common-pattern and configured-secret checks plus coding-agent inspection, not proof that arbitrary sensitive content is absent."
+}

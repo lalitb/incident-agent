@@ -1,0 +1,305 @@
+{
+  "schema_version": "structured-observations-v2",
+  "report": {
+    "assessment": "insufficient_evidence",
+    "metric_measurements": [
+      {
+        "evidence_id": "synthetic-001",
+        "metric": "request_duration_mean_seconds",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:30:00Z",
+        "statistic": "sample_mean",
+        "value": 0.21,
+        "unit": "seconds"
+      },
+      {
+        "evidence_id": "synthetic-001",
+        "metric": "request_duration_mean_seconds",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:31:00Z",
+        "statistic": "sample_mean",
+        "value": 0.22,
+        "unit": "seconds"
+      },
+      {
+        "evidence_id": "synthetic-001",
+        "metric": "request_duration_mean_seconds",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:32:00Z",
+        "statistic": "sample_mean",
+        "value": 1.04,
+        "unit": "seconds"
+      },
+      {
+        "evidence_id": "synthetic-001",
+        "metric": "request_duration_mean_seconds",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:33:00Z",
+        "statistic": "sample_mean",
+        "value": 1.08,
+        "unit": "seconds"
+      },
+      {
+        "evidence_id": "synthetic-001",
+        "metric": "request_duration_mean_seconds",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:34:00Z",
+        "statistic": "sample_mean",
+        "value": 1.06,
+        "unit": "seconds"
+      },
+      {
+        "evidence_id": "synthetic-002",
+        "metric": "request_rate",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:30:00Z",
+        "statistic": "sample_mean",
+        "value": 40.0,
+        "unit": "requests/second"
+      },
+      {
+        "evidence_id": "synthetic-002",
+        "metric": "request_rate",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:32:00Z",
+        "statistic": "sample_mean",
+        "value": 10.0,
+        "unit": "requests/second"
+      },
+      {
+        "evidence_id": "synthetic-002",
+        "metric": "request_rate",
+        "labels": {
+          "service_name": "checkout"
+        },
+        "bucket_start_utc": "2026-09-19T10:34:00Z",
+        "statistic": "sample_mean",
+        "value": 10.0,
+        "unit": "requests/second"
+      }
+    ],
+    "configuration_comparisons": [],
+    "trace_breakdowns": [],
+    "timeline_observations": [
+      {
+        "statement": "Checkout request_duration_mean_seconds was ~0.21-0.22s in the 10:30 and 10:31 buckets, then rose to ~1.04-1.08s from the 10:32 bucket onward; bucket boundaries are not exact onset times.",
+        "start_utc": "2026-09-19T10:30:00Z",
+        "end_utc": "2026-09-19T10:35:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "synthetic-001"
+        ]
+      },
+      {
+        "statement": "Checkout request_rate fell from 40 requests/second in the 10:30-10:31 buckets to 10 requests/second from the 10:32 bucket onward, coinciding with the latency rise.",
+        "start_utc": "2026-09-19T10:30:00Z",
+        "end_utc": "2026-09-19T10:35:00Z",
+        "precision": "metric_bucket",
+        "evidence_ids": [
+          "synthetic-002"
+        ]
+      },
+      {
+        "statement": "find_traces discovered one slow checkout trace (duration_ms 1060.123, source_timestamp 2026-09-19T10:33:10Z); this is a limited match, not a population average, and no spans were retrieved.",
+        "start_utc": "2026-09-19T10:33:10.000000000Z",
+        "end_utc": "2026-09-19T10:33:10.000000000Z",
+        "precision": "source_timestamp",
+        "evidence_ids": [
+          "synthetic-003"
+        ]
+      }
+    ],
+    "leading_hypothesis": {
+      "statement": "Checkout latency rose from ~0.21s to ~1.05s around the 10:32 bucket while throughput dropped from 40 to 10 rps; a plausible explanation is downstream/dependency waiting, but no span, log, or configuration evidence was collected to support any specific mechanism.",
+      "evidence_ids": [
+        "synthetic-001",
+        "synthetic-002",
+        "synthetic-003"
+      ],
+      "verification_needed": [
+        "Retrieve spans for trace 00000000000000000000000000000001 via get_trace to determine whether time is spent in downstream calls or in-service work (check-003, unresolvable due to budget).",
+        "Determine whether the latency increase is explained by downstream/dependency wait or span-level delay (check-002, unresolvable due to decision_budget).",
+        "Collect additional slow traces or logs to test whether the single discovered trace is representative.",
+        "Collect pool_limit configuration and pool_utilization metrics to test connection-pool exhaustion as a mechanism; none were supplied.",
+        "check-002: Checkout latency increase is explained by downstream/dependency wait or span-level delay (unresolvable: Collection ended (decision_budget); this check could not be resolved within the original limits.)",
+        "check-003: Inspect spans of slow trace 00000000000000000000000000000001 to determine whether the ~1.06s checkout latency is downstream/dependency wait (check-002) (unresolvable: Review identified this check after collection/context budget exhaustion.)"
+      ]
+    },
+    "supporting_findings": [
+      {
+        "statement": "Checkout mean request latency increased roughly 5x, from 0.21-0.22s (10:30-10:31 buckets) to 1.04-1.08s (10:32-10:34 buckets).",
+        "evidence_ids": [
+          "synthetic-001"
+        ]
+      },
+      {
+        "statement": "Request rate dropped from 40 to 10 requests/second in the same buckets where latency rose, so the latency increase is not explained by a traffic surge in this data.",
+        "evidence_ids": [
+          "synthetic-002"
+        ]
+      },
+      {
+        "statement": "One slow trace (POST /checkout, 1060.123 ms) was discovered in the degraded window, consistent with the elevated latency metric but not a population sample.",
+        "evidence_ids": [
+          "synthetic-003"
+        ]
+      }
+    ],
+    "contradicting_findings": [
+      {
+        "statement": "Latency rose while traffic fell, which contradicts a simple overload-from-increased-traffic explanation; the actual mechanism remains unobserved.",
+        "evidence_ids": [
+          "synthetic-001",
+          "synthetic-002"
+        ]
+      }
+    ],
+    "confidence": "low",
+    "missing_information": [
+      "No get_trace span data was retrieved, so connection acquisition versus query execution and downstream wait time cannot be compared.",
+      "No logs were collected for the window.",
+      "No configuration evidence (pool_limit) and no pool_utilization metrics were supplied; configuration_evidence_ids is empty.",
+      "Collection stopped at a controller decision budget, leaving checks check-002 and check-003 unresolvable.",
+      "Only one trace was discovered with limit 3 and min_duration_ms 800; representativeness is unknown.",
+      "check-002: Checkout latency increase is explained by downstream/dependency wait or span-level delay (unresolvable: Collection ended (decision_budget); this check could not be resolved within the original limits.)",
+      "check-003: Inspect spans of slow trace 00000000000000000000000000000001 to determine whether the ~1.06s checkout latency is downstream/dependency wait (check-002) (unresolvable: Review identified this check after collection/context budget exhaustion.)"
+    ],
+    "recommended_next_steps": [
+      "Call get_trace for trace 00000000000000000000000000000001 to break down where the ~1.06s is spent (proposal only; no action executed).",
+      "Query pool_utilization and pool_limit metrics for checkout dependencies to test a connection-pool saturation hypothesis in a controlled comparison.",
+      "Collect additional traces across the window and search logs around 10:32 to corroborate or refute downstream waiting.",
+      "Compare the degraded window against an earlier baseline window with more metric samples per bucket, since current buckets contain a single sample each."
+    ],
+    "verification_checks": [
+      {
+        "check_id": "check-001",
+        "claim": "Checkout request latency is elevated in this window",
+        "tool": "query_metrics",
+        "metric": "request_duration_mean_seconds",
+        "status": "resolved",
+        "reason": null,
+        "evidence_ids": [
+          "synthetic-001"
+        ],
+        "explanation": "request_duration_mean_seconds jumped from ~0.21-0.22s at 10:30-10:31 to ~1.04-1.08s at 10:32-10:34, confirming elevated latency in the window.",
+        "metric_measurements": [
+          {
+            "evidence_id": "synthetic-001",
+            "metric": "request_duration_mean_seconds",
+            "labels": {
+              "service_name": "checkout"
+            },
+            "bucket_start_utc": "2026-09-19T10:30:00Z",
+            "statistic": "sample_mean",
+            "value": 0.21,
+            "unit": "seconds"
+          },
+          {
+            "evidence_id": "synthetic-001",
+            "metric": "request_duration_mean_seconds",
+            "labels": {
+              "service_name": "checkout"
+            },
+            "bucket_start_utc": "2026-09-19T10:32:00Z",
+            "statistic": "sample_mean",
+            "value": 1.04,
+            "unit": "seconds"
+          },
+          {
+            "evidence_id": "synthetic-001",
+            "metric": "request_duration_mean_seconds",
+            "labels": {
+              "service_name": "checkout"
+            },
+            "bucket_start_utc": "2026-09-19T10:34:00Z",
+            "statistic": "sample_mean",
+            "value": 1.06,
+            "unit": "seconds"
+          }
+        ],
+        "trace_breakdowns": [],
+        "flagged_step": 1,
+        "source": "planner",
+        "validation": {
+          "references_and_target": "passed",
+          "structured_facts": "passed",
+          "semantic_relevance": "model_judgment_not_verified"
+        }
+      },
+      {
+        "check_id": "check-002",
+        "claim": "Checkout latency increase is explained by downstream/dependency wait or span-level delay",
+        "tool": "find_traces",
+        "metric": null,
+        "status": "unresolvable",
+        "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+        "evidence_ids": [],
+        "explanation": null,
+        "metric_measurements": [],
+        "trace_breakdowns": [],
+        "flagged_step": 2,
+        "source": "planner",
+        "validation": {}
+      },
+      {
+        "check_id": "check-003",
+        "claim": "Inspect spans of slow trace 00000000000000000000000000000001 to determine whether the ~1.06s checkout latency is downstream/dependency wait (check-002)",
+        "tool": "get_trace",
+        "metric": null,
+        "status": "unresolvable",
+        "reason": "Review identified this check after collection/context budget exhaustion.",
+        "evidence_ids": [],
+        "explanation": null,
+        "metric_measurements": [],
+        "trace_breakdowns": [],
+        "flagged_step": 6,
+        "source": "review",
+        "validation": {}
+      }
+    ]
+  },
+  "validation_error": "Rejected report: source timestamps must cite logs or retrieved traces",
+  "model_call": {
+    "provider": "moonshot",
+    "requested_model": "moonshot/kimi-k3",
+    "model": "moonshot/kimi-k3",
+    "response_id": null,
+    "elapsed_ms": 80116.07,
+    "usage": {
+      "input_tokens": 3884,
+      "output_tokens": 2041,
+      "total_tokens": 5925
+    },
+    "status": "completed",
+    "max_output_tokens": 8192,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed"
+      }
+    ],
+    "wait_seconds": 0,
+    "finish_reason": "stop",
+    "prompt_version": "structured-observations-v2",
+    "evidence_summary": {
+      "version": "evidence-summary-v2",
+      "bucket_seconds": 60,
+      "original_payload_bytes": 4297,
+      "summarized_payload_bytes": 5157
+    }
+  }
+}

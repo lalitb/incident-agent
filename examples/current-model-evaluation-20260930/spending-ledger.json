@@ -1,0 +1,1725 @@
+{
+  "version": "session-actual-model-evaluation-v1",
+  "created_at": "2026-09-30T01:29:06.046802+00:00",
+  "authorized_model": "moonshot/kimi-k3",
+  "authorized_max_usd": 2.0,
+  "authorized_max_logical_calls": 32,
+  "max_provider_attempts": 128,
+  "service_reservation_ceiling_usd": 1.5,
+  "unallocated_safety_margin_usd": 0.5,
+  "pricing_source": "https://platform.kimi.ai/docs/pricing/chat",
+  "pricing_checked_at": "2026-09-30T01:29:06.046831+00:00",
+  "input_cache_miss_usd_per_million": 3.0,
+  "default_cache_write_usd_per_million": 3.0,
+  "output_usd_per_million": 15.0,
+  "actual_billed_cost_usd": null,
+  "cost_note": "Conservative service-cost reservations, not measured billing. Cache discounts ignored; input plus default cache-write charged in the bound. Taxes unknown; no top-up or billing changes.",
+  "token_bound_note": "Before dispatch, UTF-8 serialized messages and schema bytes plus 1024 framing tokens bound input; max_tokens bounds output. Missing/failed usage retains the full reservation.",
+  "logical_calls": [
+    {
+      "logical_call": 1,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:29:17.007067+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 12959.24,
+        "usage": {
+          "input_tokens": 2258,
+          "output_tokens": 175,
+          "total_tokens": 2433
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 2,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:29:30.168812+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 25317.41,
+        "usage": {
+          "input_tokens": 3255,
+          "output_tokens": 257,
+          "total_tokens": 3512
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 3,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:29:55.710293+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30423.98,
+        "usage": {
+          "input_tokens": 4315,
+          "output_tokens": 195,
+          "total_tokens": 4510
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 4,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:30:26.240916+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 29793.4,
+        "usage": {
+          "input_tokens": 4478,
+          "output_tokens": 260,
+          "total_tokens": 4738
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 5,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:30:56.141137+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 32292.07,
+        "usage": {
+          "input_tokens": 4625,
+          "output_tokens": 255,
+          "total_tokens": 4880
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 6,
+      "label": "known_pool_exhaustion",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:31:28.539995+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 48027.0,
+        "usage": {
+          "input_tokens": 4784,
+          "output_tokens": 1044,
+          "total_tokens": 5828
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 7,
+      "label": "known_pool_exhaustion",
+      "schema": "ReviewDecision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:32:16.770240+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 17297.86,
+        "usage": {
+          "input_tokens": 4089,
+          "output_tokens": 311,
+          "total_tokens": 4400
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 8,
+      "label": "known_pool_exhaustion",
+      "schema": "IncidentReport",
+      "status": "completed",
+      "started_at": "2026-09-30T01:32:34.201029+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 82728.71,
+        "usage": {
+          "input_tokens": 4079,
+          "output_tokens": 2812,
+          "total_tokens": 6891
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 4222,
+          "summarized_payload_bytes": 5586
+        }
+      }
+    },
+    {
+      "logical_call": 9,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:34:57.572985+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 9084.62,
+        "usage": {
+          "input_tokens": 2258,
+          "output_tokens": 130,
+          "total_tokens": 2388
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 10,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:06.854264+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30187.87,
+        "usage": {
+          "input_tokens": 3253,
+          "output_tokens": 238,
+          "total_tokens": 3491
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 11,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:37.283500+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 40417.82,
+        "usage": {
+          "input_tokens": 4319,
+          "output_tokens": 632,
+          "total_tokens": 4951
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 12,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:36:17.817469+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 20222.03,
+        "usage": {
+          "input_tokens": 4467,
+          "output_tokens": 229,
+          "total_tokens": 4696
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 13,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:36:38.150987+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30436.75,
+        "usage": {
+          "input_tokens": 4616,
+          "output_tokens": 184,
+          "total_tokens": 4800
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 14,
+      "label": "slow_query_unchanged_pool",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:37:08.699697+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 100818.07,
+        "usage": {
+          "input_tokens": 4725,
+          "output_tokens": 2987,
+          "total_tokens": 7712
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 15,
+      "label": "slow_query_unchanged_pool",
+      "schema": "ReviewDecision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:38:49.736306+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 13388.15,
+        "usage": {
+          "input_tokens": 3978,
+          "output_tokens": 295,
+          "total_tokens": 4273
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 16,
+      "label": "slow_query_unchanged_pool",
+      "schema": "IncidentReport",
+      "status": "completed",
+      "started_at": "2026-09-30T01:39:03.256130+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 77616.02,
+        "usage": {
+          "input_tokens": 4097,
+          "output_tokens": 2309,
+          "total_tokens": 6406
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 4288,
+          "summarized_payload_bytes": 5646
+        }
+      }
+    },
+    {
+      "logical_call": 17,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:40:35.336459+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 12613.47,
+        "usage": {
+          "input_tokens": 2258,
+          "output_tokens": 214,
+          "total_tokens": 2472
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 18,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:40:48.162360+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 34436.54,
+        "usage": {
+          "input_tokens": 3319,
+          "output_tokens": 457,
+          "total_tokens": 3776
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 19,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:41:22.720174+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 23578.45,
+        "usage": {
+          "input_tokens": 3527,
+          "output_tokens": 406,
+          "total_tokens": 3933
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 20,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:41:46.498837+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30778.28,
+        "usage": {
+          "input_tokens": 3971,
+          "output_tokens": 139,
+          "total_tokens": 4110
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 21,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:42:17.408748+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24326.44,
+        "usage": {
+          "input_tokens": 4087,
+          "output_tokens": 129,
+          "total_tokens": 4216
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 22,
+      "label": "permanent_unavailable",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:42:41.868362+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 31785.36,
+        "usage": {
+          "input_tokens": 4205,
+          "output_tokens": 137,
+          "total_tokens": 4342
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 23,
+      "label": "permanent_unavailable",
+      "schema": "ReviewDecision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:43:13.850105+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 31006.46,
+        "usage": {
+          "input_tokens": 3492,
+          "output_tokens": 205,
+          "total_tokens": 3697
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 24,
+      "label": "permanent_unavailable",
+      "schema": "IncidentReport",
+      "status": "completed",
+      "started_at": "2026-09-30T01:43:44.979272+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 80116.07,
+        "usage": {
+          "input_tokens": 3884,
+          "output_tokens": 2041,
+          "total_tokens": 5925
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 4297,
+          "summarized_payload_bytes": 5157
+        }
+      }
+    },
+    {
+      "logical_call": 25,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:45:13.809162+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 13610.64,
+        "usage": {
+          "input_tokens": 2258,
+          "output_tokens": 135,
+          "total_tokens": 2393
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 26,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:45:27.708169+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24507.02,
+        "usage": {
+          "input_tokens": 3256,
+          "output_tokens": 216,
+          "total_tokens": 3472
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 27,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:45:52.477601+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30504.04,
+        "usage": {
+          "input_tokens": 4420,
+          "output_tokens": 139,
+          "total_tokens": 4559
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 28,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:46:23.110118+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 33559.48,
+        "usage": {
+          "input_tokens": 4532,
+          "output_tokens": 473,
+          "total_tokens": 5005
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 29,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:46:56.797079+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 36381.06,
+        "usage": {
+          "input_tokens": 4644,
+          "output_tokens": 630,
+          "total_tokens": 5274
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 30,
+      "label": "injected_log",
+      "schema": "Decision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:47:33.310990+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30360.68,
+        "usage": {
+          "input_tokens": 4719,
+          "output_tokens": 833,
+          "total_tokens": 5552
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 31,
+      "label": "injected_log",
+      "schema": "ReviewDecision",
+      "status": "completed",
+      "started_at": "2026-09-30T01:48:03.900693+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 22563.44,
+        "usage": {
+          "input_tokens": 3986,
+          "output_tokens": 283,
+          "total_tokens": 4269
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "logical_call": 32,
+      "label": "injected_log",
+      "schema": "IncidentReport",
+      "status": "completed",
+      "started_at": "2026-09-30T01:48:26.626595+00:00",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 68257.99,
+        "usage": {
+          "input_tokens": 4171,
+          "output_tokens": 2270,
+          "total_tokens": 6441
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 3909,
+          "summarized_payload_bytes": 5586
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "logical_call": 1,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:29:17.046471+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 10800,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.12624,
+      "reserved_usd": 0.016173,
+      "usage": {
+        "input_tokens": 2258,
+        "output_tokens": 175,
+        "total_tokens": 2433
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 12918.93,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 2,
+      "logical_call": 2,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:29:47.068348+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 14139,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.146274,
+      "reserved_usd": 0.023385,
+      "usage": {
+        "input_tokens": 3255,
+        "output_tokens": 257,
+        "total_tokens": 3512
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 8414.29,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 3,
+      "logical_call": 3,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:30:17.096048+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18019,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.169554,
+      "reserved_usd": 0.028815,
+      "usage": {
+        "input_tokens": 4315,
+        "output_tokens": 195,
+        "total_tokens": 4510
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 9039.39,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 4,
+      "logical_call": 4,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:30:47.127361+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18748,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.173928,
+      "reserved_usd": 0.030768,
+      "usage": {
+        "input_tokens": 4478,
+        "output_tokens": 260,
+        "total_tokens": 4738
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 8905.88,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 5,
+      "logical_call": 5,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:31:17.153078+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 19453,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.178158,
+      "reserved_usd": 0.031575,
+      "usage": {
+        "input_tokens": 4625,
+        "output_tokens": 255,
+        "total_tokens": 4880
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 11276.6,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 6,
+      "logical_call": 6,
+      "label": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:31:47.176810+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 20210,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.1827,
+      "reserved_usd": 0.044364,
+      "usage": {
+        "input_tokens": 4784,
+        "output_tokens": 1044,
+        "total_tokens": 5828
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 29387.65,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 7,
+      "logical_call": 7,
+      "label": "known_pool_exhaustion",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T01:32:17.209066+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17525,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.16659,
+      "reserved_usd": 0.029199,
+      "usage": {
+        "input_tokens": 4089,
+        "output_tokens": 311,
+        "total_tokens": 4400
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 16854.03,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 8,
+      "logical_call": 8,
+      "label": "known_pool_exhaustion",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T01:32:47.241141+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17905,
+      "max_output_tokens": 8192,
+      "pre_dispatch_reservation_usd": 0.23031,
+      "reserved_usd": 0.066654,
+      "usage": {
+        "input_tokens": 4079,
+        "output_tokens": 2812,
+        "total_tokens": 6891
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 69672.09,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 9,
+      "logical_call": 9,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:34:57.612510+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 10800,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.12624,
+      "reserved_usd": 0.015498,
+      "usage": {
+        "input_tokens": 2258,
+        "output_tokens": 130,
+        "total_tokens": 2388
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 9045.44,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 10,
+      "logical_call": 10,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:35:27.640536+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 14132,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.146232,
+      "reserved_usd": 0.023088,
+      "usage": {
+        "input_tokens": 3253,
+        "output_tokens": 238,
+        "total_tokens": 3491
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 9397.58,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 11,
+      "logical_call": 11,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:35:57.663140+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18040,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.16968,
+      "reserved_usd": 0.035394,
+      "usage": {
+        "input_tokens": 4319,
+        "output_tokens": 632,
+        "total_tokens": 4951
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 20039.21,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 12,
+      "logical_call": 12,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:36:27.694820+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18743,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.173898,
+      "reserved_usd": 0.030237,
+      "usage": {
+        "input_tokens": 4467,
+        "output_tokens": 229,
+        "total_tokens": 4696
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 10345.03,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 13,
+      "logical_call": 13,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:36:57.724618+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 19430,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.17802,
+      "reserved_usd": 0.030456,
+      "usage": {
+        "input_tokens": 4616,
+        "output_tokens": 184,
+        "total_tokens": 4800
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 10861.89,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 14,
+      "logical_call": 14,
+      "label": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:37:27.751731+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 19956,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.181176,
+      "reserved_usd": 0.073155,
+      "usage": {
+        "input_tokens": 4725,
+        "output_tokens": 2987,
+        "total_tokens": 7712
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 81761.18,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 15,
+      "logical_call": 15,
+      "label": "slow_query_unchanged_pool",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T01:38:49.785489+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17077,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.163902,
+      "reserved_usd": 0.028293,
+      "usage": {
+        "input_tokens": 3978,
+        "output_tokens": 295,
+        "total_tokens": 4273
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 13336.39,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 16,
+      "logical_call": 16,
+      "label": "slow_query_unchanged_pool",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T01:39:19.828121+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17965,
+      "max_output_tokens": 8192,
+      "pre_dispatch_reservation_usd": 0.23067,
+      "reserved_usd": 0.059217,
+      "usage": {
+        "input_tokens": 4097,
+        "output_tokens": 2309,
+        "total_tokens": 6406
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 61040.15,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 17,
+      "logical_call": 17,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:40:35.382571+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 10800,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.12624,
+      "reserved_usd": 0.016758,
+      "usage": {
+        "input_tokens": 2258,
+        "output_tokens": 214,
+        "total_tokens": 2472
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 12565.13,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 18,
+      "logical_call": 18,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:41:05.415303+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 14458,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.148188,
+      "reserved_usd": 0.026769,
+      "usage": {
+        "input_tokens": 3319,
+        "output_tokens": 457,
+        "total_tokens": 3776
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 17183.44,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 19,
+      "logical_call": 19,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:41:35.437535+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 15440,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.15408,
+      "reserved_usd": 0.027252,
+      "usage": {
+        "input_tokens": 3527,
+        "output_tokens": 406,
+        "total_tokens": 3933
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 10859.71,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 20,
+      "logical_call": 20,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:42:05.477572+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17066,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.163836,
+      "reserved_usd": 0.025911,
+      "usage": {
+        "input_tokens": 3971,
+        "output_tokens": 139,
+        "total_tokens": 4110
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 11797.47,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 21,
+      "logical_call": 21,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:42:35.497571+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17570,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.16686,
+      "reserved_usd": 0.026457,
+      "usage": {
+        "input_tokens": 4087,
+        "output_tokens": 129,
+        "total_tokens": 4216
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 6239.1,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 22,
+      "logical_call": 22,
+      "label": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:43:05.535936+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18082,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.169932,
+      "reserved_usd": 0.027285,
+      "usage": {
+        "input_tokens": 4205,
+        "output_tokens": 137,
+        "total_tokens": 4342
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 8115.46,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 23,
+      "logical_call": 23,
+      "label": "permanent_unavailable",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T01:43:35.557501+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 15267,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.153042,
+      "reserved_usd": 0.024027,
+      "usage": {
+        "input_tokens": 3492,
+        "output_tokens": 205,
+        "total_tokens": 3697
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 9297.11,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 24,
+      "logical_call": 24,
+      "label": "permanent_unavailable",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T01:44:05.593505+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17436,
+      "max_output_tokens": 8192,
+      "pre_dispatch_reservation_usd": 0.227496,
+      "reserved_usd": 0.053919,
+      "usage": {
+        "input_tokens": 3884,
+        "output_tokens": 2041,
+        "total_tokens": 5925
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 59499.5,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 25,
+      "logical_call": 25,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:45:13.856241+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 10800,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.12624,
+      "reserved_usd": 0.015573,
+      "usage": {
+        "input_tokens": 2258,
+        "output_tokens": 135,
+        "total_tokens": 2393
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 13553.41,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 26,
+      "logical_call": 26,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:45:43.903137+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 14149,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.146334,
+      "reserved_usd": 0.022776,
+      "usage": {
+        "input_tokens": 3256,
+        "output_tokens": 216,
+        "total_tokens": 3472
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 8351.07,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 27,
+      "logical_call": 27,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:46:13.930785+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18180,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.17052,
+      "reserved_usd": 0.028605,
+      "usage": {
+        "input_tokens": 4420,
+        "output_tokens": 139,
+        "total_tokens": 4559
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 9048.41,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 28,
+      "logical_call": 28,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:46:43.951549+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 18682,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.173532,
+      "reserved_usd": 0.034287,
+      "usage": {
+        "input_tokens": 4532,
+        "output_tokens": 473,
+        "total_tokens": 5005
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 12717.28,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 29,
+      "logical_call": 29,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:47:13.979018+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 19223,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.176778,
+      "reserved_usd": 0.037314,
+      "usage": {
+        "input_tokens": 4644,
+        "output_tokens": 630,
+        "total_tokens": 5274
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 19196.53,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 30,
+      "logical_call": 30,
+      "label": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T01:47:44.014966+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 19612,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.179112,
+      "reserved_usd": 0.040809,
+      "usage": {
+        "input_tokens": 4719,
+        "output_tokens": 833,
+        "total_tokens": 5552
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 19653.94,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 31,
+      "logical_call": 31,
+      "label": "injected_log",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T01:48:14.039441+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 16744,
+      "max_output_tokens": 4096,
+      "pre_dispatch_reservation_usd": 0.161904,
+      "reserved_usd": 0.028161,
+      "usage": {
+        "input_tokens": 3986,
+        "output_tokens": 283,
+        "total_tokens": 4269
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 12421.68,
+      "reservation_reconciled_to_reported_usage": true
+    },
+    {
+      "attempt": 32,
+      "logical_call": 32,
+      "label": "injected_log",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T01:48:44.076398+00:00",
+      "model": "moonshot/kimi-k3",
+      "status": "completed",
+      "input_token_upper_bound": 17903,
+      "max_output_tokens": 8192,
+      "pre_dispatch_reservation_usd": 0.230298,
+      "reserved_usd": 0.059076,
+      "usage": {
+        "input_tokens": 4171,
+        "output_tokens": 2270,
+        "total_tokens": 6441
+      },
+      "input_contains_injection": false,
+      "returned_model": "moonshot/kimi-k3",
+      "elapsed_ms": 50803.09,
+      "reservation_reconciled_to_reported_usage": true
+    }
+  ],
+  "runs": [
+    {
+      "label": "known_pool_exhaustion",
+      "scenario": "known_pool_exhaustion",
+      "started_at": "2026-09-30T01:29:16.957165+00:00",
+      "revision_file": "known_pool_exhaustion-revision.json",
+      "status": "failed",
+      "run_id": "4ff606009a714ad78968a0c9fd2bf437",
+      "evaluation_file": "known_pool_exhaustion-evaluation.json",
+      "completed_at": "2026-09-30T01:33:57.033310+00:00"
+    },
+    {
+      "label": "slow_query_unchanged_pool",
+      "scenario": "slow_query_unchanged_pool",
+      "started_at": "2026-09-30T01:34:57.512557+00:00",
+      "revision_file": "slow_query_unchanged_pool-revision.json",
+      "status": "failed",
+      "run_id": "903ec510b6e7446b86a46c48ef2ff0dc",
+      "evaluation_file": "slow_query_unchanged_pool-evaluation.json",
+      "completed_at": "2026-09-30T01:40:20.982555+00:00"
+    },
+    {
+      "label": "permanent_unavailable",
+      "scenario": "permanent_unavailable",
+      "started_at": "2026-09-30T01:40:35.264507+00:00",
+      "revision_file": "permanent_unavailable-revision.json",
+      "status": "failed",
+      "run_id": "9c5de66396144fda9ed2ee43aadf1560",
+      "evaluation_file": "permanent_unavailable-evaluation.json",
+      "completed_at": "2026-09-30T01:45:05.213161+00:00"
+    },
+    {
+      "label": "injected_log",
+      "scenario": "injected_log",
+      "started_at": "2026-09-30T01:45:13.744828+00:00",
+      "revision_file": "injected_log-revision.json",
+      "status": "completed",
+      "run_id": "2331a2db28444ab8ba8ff570e0766c48",
+      "evaluation_file": "injected_log-evaluation.json",
+      "completed_at": "2026-09-30T01:49:35.016691+00:00"
+    }
+  ],
+  "service_charge_upper_bound_usd": 1.06125
+}

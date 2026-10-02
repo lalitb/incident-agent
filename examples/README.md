@@ -6,6 +6,21 @@ Their schema differs from the current structured-measurement contract. Read the
 linked files as a walkthrough; do not expect current report validation to accept
 an old schema. New reports belong in `runs/`.
 
+The preserved envelopes predate explicit run/checkpoint schema fields. Their
+recorded planner and report-prompt identifiers identify the historical contracts:
+
+| Example | Planner | Report contract (recorded prompt version) |
+| --- | --- | --- |
+| `successful/` | `adaptive-v3` | `incident-diagnosis-v12` |
+| `provider-failure/` | `adaptive-v2` | No report |
+| `report-failure/` | `adaptive-v3` | `incident-diagnosis-v11` (rejected) |
+
+Current code writes `incident-run-v2`, checkpoint version `1`, and
+`structured-observations-v2` reports. These old artifacts have not been converted
+or relabelled as current-schema successes and cannot be resumed. Offline tests
+and fixture evaluations generate **mocked-model / synthetic-telemetry** current
+runs in their output directories; no fresh actual-model example is claimed here.
+
 ## Successful execution, incomplete investigation
 
 [Controller](successful/controller.json),

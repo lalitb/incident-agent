@@ -1,0 +1,337 @@
+{
+  "run_id": "903ec510b6e7446b86a46c48ef2ff0dc",
+  "created_at": "2026-09-30T01:34:57.533585+00:00",
+  "question": "What explains checkout latency in this window, using only the returned synthetic telemetry?",
+  "service": "checkout",
+  "window": {
+    "start": "2026-09-19T10:30:00Z",
+    "end": "2026-09-19T10:35:00Z"
+  },
+  "evidence": [
+    {
+      "tool": "query_metrics",
+      "metric": "request_rate",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 40.0
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 40.0
+            },
+            {
+              "timestamp": 1789813930,
+              "value": 9.0
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 9.0
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 9.0
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-001",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "request_rate",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 0.21
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 0.22
+            },
+            {
+              "timestamp": 1789813930,
+              "value": 1.04
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 1.08
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 1.06
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-002",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "request_duration_mean_seconds",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "query_metrics",
+      "metric": "pool_utilization",
+      "data": [
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "points": [
+            {
+              "timestamp": 1789813810,
+              "value": 0.6
+            },
+            {
+              "timestamp": 1789813870,
+              "value": 0.7
+            }
+          ]
+        },
+        {
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "points": [
+            {
+              "timestamp": 1789813930,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789813990,
+              "value": 1.0
+            },
+            {
+              "timestamp": 1789814050,
+              "value": 1.0
+            }
+          ]
+        }
+      ],
+      "evidence_id": "synthetic-003",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "metric": "pool_utilization",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z"
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    },
+    {
+      "tool": "find_traces",
+      "data": [
+        {
+          "trace_id": "00000000000000000000000000000001",
+          "root_service": "checkout",
+          "root_span": "POST /checkout",
+          "start_time_unix_nano": "1789813990000000000",
+          "duration_ms": 1060.123
+        }
+      ],
+      "selection": "Synthetic limited matches, not a population sample or slowest ranking",
+      "evidence_id": "synthetic-004",
+      "source": "synthetic://fixture-telemetry",
+      "query_parameters": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "min_duration_ms": 800,
+        "limit": 3
+      },
+      "fixture_backed": true,
+      "synthetic": true,
+      "fixture_version": "synthetic-telemetry-v1",
+      "content_is_untrusted": true
+    }
+  ],
+  "collection_errors": [
+    {
+      "tool": "controller",
+      "error": {
+        "code": "decision_budget",
+        "message": "Collection stopped at a controller limit. Use only collected evidence; uncertainty remains."
+      }
+    }
+  ],
+  "calls": [
+    {
+      "attempt_id": "tool-001",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "request_rate"
+      },
+      "fingerprint": "4fddc3da894385c139891298e518b817ec345031edf1f32567de962312597043",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:06.723458+00:00",
+      "decision_step": 1,
+      "ok": true,
+      "elapsed_ms": 0.67,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 650
+      },
+      "evidence_id": "synthetic-001"
+    },
+    {
+      "attempt_id": "tool-002",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "request_duration_mean_seconds"
+      },
+      "fingerprint": "ba5ebbfa1a8ab82408786b0739ee393e9828836ace6a19f44559b58988ec9b43",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:06.766564+00:00",
+      "decision_step": 1,
+      "ok": true,
+      "elapsed_ms": 0.62,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 687
+      },
+      "evidence_id": "synthetic-002"
+    },
+    {
+      "attempt_id": "tool-003",
+      "tool": "query_metrics",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "metric": "pool_utilization"
+      },
+      "fingerprint": "0d131aafeb892b128f1828a8395e22112bf3daa9f33ad9dfa87c044845d7250a",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:37.124643+00:00",
+      "decision_step": 2,
+      "ok": true,
+      "elapsed_ms": 0.66,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 760
+      },
+      "evidence_id": "synthetic-003"
+    },
+    {
+      "attempt_id": "tool-004",
+      "tool": "find_traces",
+      "arguments": {
+        "service": "checkout",
+        "start": "2026-09-19T10:30:00Z",
+        "end": "2026-09-19T10:35:00Z",
+        "limit": 3,
+        "min_duration_ms": 800
+      },
+      "fingerprint": "0e15a30376c1b898c2633ff824bd1e0b316ac606e81052ed2f31b87db2a888e7",
+      "attempt": 1,
+      "is_retry": false,
+      "status": "completed",
+      "started_at": "2026-09-30T01:35:37.174964+00:00",
+      "decision_step": 2,
+      "ok": true,
+      "elapsed_ms": 0.7,
+      "guardrails": {
+        "redaction_replacements": 0,
+        "result_bytes": 638
+      },
+      "evidence_id": "synthetic-004"
+    }
+  ],
+  "checkpoint_version": 1,
+  "schema_version": "incident-run-v2",
+  "generation": 51,
+  "verification_checks": {
+    "check-001": {
+      "check_id": "check-001",
+      "claim": "Checkout latency increase is driven by connection pool saturation (pool utilization and connection wait rise at 10:32).",
+      "tool": "query_metrics",
+      "metric": "pool_utilization",
+      "status": "unresolvable",
+      "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 2,
+      "source": "planner",
+      "validation": {}
+    },
+    "check-002": {
+      "check_id": "check-002",
+      "claim": "Slow requests show where time is spent at span level (e.g., waiting vs downstream call).",
+      "tool": "find_traces",
+      "metric": null,
+      "status": "unresolvable",
+      "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 2,
+      "source": "planner",
+      "validation": {}
+    },
+    "check-003": {
+      "check_id": "check-003",
+      "claim": "Confirm whether checkout connection wait increased at 10:32 when pool utilization reached 1.0, supporting pool saturation as the latency mechanism.",
+      "tool": "query_metrics",
+      "metric": "connection_wait_mean_seconds",
+      "status": "unresolvable",
+      "reason": "Review identified this check after collection/context budget exhaustion.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 6,
+      "source": "review",
+      "validation": {}
+    }
+  },
+  "artifact_label": "Synthetic telemetry; actual model investigation; sanitized copy."
+}

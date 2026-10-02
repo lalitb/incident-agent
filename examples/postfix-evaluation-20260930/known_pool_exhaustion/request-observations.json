@@ -1,0 +1,91 @@
+[
+  {
+    "attempt": 1,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "2d3d5ac7a443cd455c24ccc45cfc1424f20be4a1e1b6b3144b1560c4a60134d3",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": [
+      "query_metrics",
+      "query_metrics"
+    ]
+  },
+  {
+    "attempt": 2,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "e72e0807b01c1acb70dfbaad27b094a33b1067b08081826c7ba4f5073bf3ea85",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": [
+      "query_metrics",
+      "query_metrics"
+    ]
+  },
+  {
+    "attempt": 3,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "50a8232f26726ba53d3f3d12d639f15f6759ca343cf91bd3047290a355a941d1",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": [
+      "query_metrics",
+      "find_traces"
+    ]
+  },
+  {
+    "attempt": 4,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "67196e8cc4e0c03f194a25a4facce7e9f2ed2c8463ad6d14a5939ae9d545b89b",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": [
+      "get_trace"
+    ]
+  },
+  {
+    "attempt": 5,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "12fa3e74f682fc467635755b1ec23943c39e2fbffe7741767db8e28fbcb7f3c6",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": []
+  },
+  {
+    "attempt": 6,
+    "stage": "Decision",
+    "sanitized_messages_sha256": "424c7e8a15e7312b35f1b6a559c1df68abd5539ecf37dbd469e2898a5dc931a0",
+    "schema_sha256": "8f8b2b3578b3172b592ad0b04a2cf73492b22d0b3558f9e1e1c1d28de1e119db",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false,
+    "proposed_tool_names": []
+  },
+  {
+    "attempt": 7,
+    "stage": "ReviewDecision",
+    "sanitized_messages_sha256": "635453467ac2237f3f1c9aae8fbdf0e730b7a2acc7a5db971cb4047a648e3612",
+    "schema_sha256": "46df7a6276403144acab662ad2d12615cb64efb366ecd4f6ba0dabe03086d8b4",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false
+  },
+  {
+    "attempt": 8,
+    "stage": "IncidentReport",
+    "sanitized_messages_sha256": "99530855bb1ed711a9dce64844a018a238a3e1a5e262b8cb56aa477e88e863ba",
+    "schema_sha256": "c676faea250b83c212b34e67d88703c17fc9fc92c31f9868d7256093f66de99e",
+    "attack_text_present": false,
+    "provider_response_received": true,
+    "response_has_injection_marker": false
+  }
+]

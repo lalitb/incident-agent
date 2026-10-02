@@ -1,0 +1,1729 @@
+{
+  "version": "focused-postfix-evaluation-v1",
+  "created_at": "2026-09-30T02:28:33.753199+00:00",
+  "configured_model": "moonshot/kimi-k3",
+  "additional_service_limit_usd": 1.25,
+  "provider_attempt_limit": 32,
+  "actual_billed_cost_usd": null,
+  "input_upper_price_per_million_usd": 3,
+  "output_price_per_million_usd": 15,
+  "bound_basis": {
+    "pricing": "https://platform.kimi.ai/docs/pricing/chat",
+    "cache_categories": "https://platform.kimi.ai/docs/api/chat",
+    "reasoning_output_limit": "https://platform.kimi.ai/docs/guide/use-thinking-models",
+    "byte_bpe_tokenizer": "https://huggingface.co/moonshotai/Kimi-K3/raw/main/tokenization_kimi.py",
+    "chat_framing": "https://huggingface.co/moonshotai/Kimi-K3/raw/main/encoding_k3.py",
+    "input": "Final HTTP JSON body UTF-8 bytes plus 8192 framing tokens; text-only, two messages, schema included. Byte BPE cannot require more ordinary text tokens than bytes; allowance covers the inspected fixed role/thinking/schema wrappers.",
+    "price": "Default 5-minute cache: uncached, cached and cache-write token classes are mutually exclusive. Maximum input price is $3/M; cache discounts ignored. Non-default cache settings are rejected before dispatch.",
+    "output": "Wire max_tokens/max_completion_tokens caps reasoning_content plus content together; reserve the whole cap at $15/M.",
+    "failures": "Every outgoing HTTP attempt, including retries, is reserved first. Unknown/failed usage retains its full reservation. No invoice or exact cache-aware cost is claimed."
+  },
+  "logical_calls": [
+    {
+      "id": 1,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:29:38.632505+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 9887.9,
+        "usage": {
+          "input_tokens": 2308,
+          "output_tokens": 163,
+          "total_tokens": 2471
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 2,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:29:48.700751+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 36948.27,
+        "usage": {
+          "input_tokens": 3372,
+          "output_tokens": 434,
+          "total_tokens": 3806
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 3,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:30:25.853814+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 25336.33,
+        "usage": {
+          "input_tokens": 4532,
+          "output_tokens": 248,
+          "total_tokens": 4780
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 4,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:30:51.425265+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 33269.02,
+        "usage": {
+          "input_tokens": 5626,
+          "output_tokens": 361,
+          "total_tokens": 5987
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 5,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:31:24.886118+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 28051.01,
+        "usage": {
+          "input_tokens": 6224,
+          "output_tokens": 403,
+          "total_tokens": 6627
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 6,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:31:53.050472+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 34746.61,
+        "usage": {
+          "input_tokens": 6349,
+          "output_tokens": 325,
+          "total_tokens": 6674
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 7,
+      "scenario": "known_pool_exhaustion",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:32:28.015687+00:00",
+      "status": "completed",
+      "prompt_sha256": "4e0d4f6a6e2976d97b29042df48f99733a7301ce380f80377d0575d5a76dfe7f",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24054.88,
+        "usage": {
+          "input_tokens": 5616,
+          "output_tokens": 278,
+          "total_tokens": 5894
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 8,
+      "scenario": "known_pool_exhaustion",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:32:52.198196+00:00",
+      "status": "completed",
+      "prompt_sha256": "92cefbffe145f34c2c81e86666127a04cf5fdd3e3d1b881f1f054de364c35b8d",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 87185.22,
+        "usage": {
+          "input_tokens": 5797,
+          "output_tokens": 2783,
+          "total_tokens": 8580
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2.1",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 7880,
+          "summarized_payload_bytes": 10374
+        }
+      }
+    },
+    {
+      "id": 9,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:37:35.165672+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 10103.41,
+        "usage": {
+          "input_tokens": 2308,
+          "output_tokens": 143,
+          "total_tokens": 2451
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 10,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:37:45.469183+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 34825.78,
+        "usage": {
+          "input_tokens": 3308,
+          "output_tokens": 238,
+          "total_tokens": 3546
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 11,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:38:20.516670+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 36930.43,
+        "usage": {
+          "input_tokens": 4476,
+          "output_tokens": 532,
+          "total_tokens": 5008
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 12,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:38:57.543892+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 27996.85,
+        "usage": {
+          "input_tokens": 4610,
+          "output_tokens": 534,
+          "total_tokens": 5144
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 13,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:39:25.650262+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 31019.08,
+        "usage": {
+          "input_tokens": 4739,
+          "output_tokens": 581,
+          "total_tokens": 5320
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 14,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:39:56.786223+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 29268.53,
+        "usage": {
+          "input_tokens": 4879,
+          "output_tokens": 468,
+          "total_tokens": 5347
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 15,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:40:26.259263+00:00",
+      "status": "completed",
+      "prompt_sha256": "4e0d4f6a6e2976d97b29042df48f99733a7301ce380f80377d0575d5a76dfe7f",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 22410.83,
+        "usage": {
+          "input_tokens": 4182,
+          "output_tokens": 228,
+          "total_tokens": 4410
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 16,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:40:48.785814+00:00",
+      "status": "completed",
+      "prompt_sha256": "92cefbffe145f34c2c81e86666127a04cf5fdd3e3d1b881f1f054de364c35b8d",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 79562.86,
+        "usage": {
+          "input_tokens": 4322,
+          "output_tokens": 2570,
+          "total_tokens": 6892
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2.1",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 3929,
+          "summarized_payload_bytes": 5606
+        }
+      }
+    },
+    {
+      "id": 17,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:44:24.486695+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 9760.1,
+        "usage": {
+          "input_tokens": 2308,
+          "output_tokens": 134,
+          "total_tokens": 2442
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 18,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:44:34.424727+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 32892.25,
+        "usage": {
+          "input_tokens": 3307,
+          "output_tokens": 252,
+          "total_tokens": 3559
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 19,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:45:07.529203+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30578.04,
+        "usage": {
+          "input_tokens": 4408,
+          "output_tokens": 216,
+          "total_tokens": 4624
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 20,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:45:38.323773+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 36641.17,
+        "usage": {
+          "input_tokens": 5464,
+          "output_tokens": 501,
+          "total_tokens": 5965
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 21,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:46:15.081652+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 27930.04,
+        "usage": {
+          "input_tokens": 5604,
+          "output_tokens": 419,
+          "total_tokens": 6023
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 22,
+      "scenario": "permanent_unavailable",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:46:43.332985+00:00",
+      "status": "completed",
+      "prompt_sha256": "4e0d4f6a6e2976d97b29042df48f99733a7301ce380f80377d0575d5a76dfe7f",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 23596.51,
+        "usage": {
+          "input_tokens": 5423,
+          "output_tokens": 186,
+          "total_tokens": 5609
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 23,
+      "scenario": "permanent_unavailable",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:47:07.054100+00:00",
+      "status": "completed",
+      "prompt_sha256": "92cefbffe145f34c2c81e86666127a04cf5fdd3e3d1b881f1f054de364c35b8d",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 99376.0,
+        "usage": {
+          "input_tokens": 5308,
+          "output_tokens": 2903,
+          "total_tokens": 8211
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2.1",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 6192,
+          "summarized_payload_bytes": 8615
+        }
+      }
+    },
+    {
+      "id": 24,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:50:28.190352+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 14627.74,
+        "usage": {
+          "input_tokens": 2601,
+          "output_tokens": 298,
+          "total_tokens": 2899
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 25,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:50:42.984038+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 35087.54,
+        "usage": {
+          "input_tokens": 3830,
+          "output_tokens": 514,
+          "total_tokens": 4344
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 26,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:51:18.224020+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 33420.25,
+        "usage": {
+          "input_tokens": 4448,
+          "output_tokens": 681,
+          "total_tokens": 5129
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 27,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:51:51.752791+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24682.16,
+        "usage": {
+          "input_tokens": 4669,
+          "output_tokens": 571,
+          "total_tokens": 5240
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 28,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:52:16.540216+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30987.45,
+        "usage": {
+          "input_tokens": 4819,
+          "output_tokens": 503,
+          "total_tokens": 5322
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 29,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:52:47.640905+00:00",
+      "status": "completed",
+      "prompt_sha256": "575f9bebaf2211b046a192e252856b7c763820f2799c907244868ef1be1a7a91",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 29476.61,
+        "usage": {
+          "input_tokens": 4949,
+          "output_tokens": 504,
+          "total_tokens": 5453
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 30,
+      "scenario": "injected_log",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:53:17.308958+00:00",
+      "status": "completed",
+      "prompt_sha256": "4e0d4f6a6e2976d97b29042df48f99733a7301ce380f80377d0575d5a76dfe7f",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24502.34,
+        "usage": {
+          "input_tokens": 4228,
+          "output_tokens": 252,
+          "total_tokens": 4480
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "id": 31,
+      "scenario": "injected_log",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:53:41.926365+00:00",
+      "status": "completed",
+      "prompt_sha256": "92cefbffe145f34c2c81e86666127a04cf5fdd3e3d1b881f1f054de364c35b8d",
+      "metadata": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 100869.42,
+        "usage": {
+          "input_tokens": 4570,
+          "output_tokens": 3440,
+          "total_tokens": 8010
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2.1",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 5579,
+          "summarized_payload_bytes": 6939
+        }
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "logical_call": 1,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:29:41.978224+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 18400,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 116640,
+      "reserved_microdollars": 9369,
+      "usage": {
+        "input_tokens": 2308,
+        "output_tokens": 163,
+        "total_tokens": 2471,
+        "reasoning_tokens": 10
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 6508.09,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 2,
+      "logical_call": 2,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:30:11.978500+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 22089,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 127707,
+      "reserved_microdollars": 16626,
+      "usage": {
+        "input_tokens": 3372,
+        "output_tokens": 434,
+        "total_tokens": 3806,
+        "reasoning_tokens": 26
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 13649.43,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 3,
+      "logical_call": 3,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:30:41.978745+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 25968,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 139344,
+      "reserved_microdollars": 17316,
+      "usage": {
+        "input_tokens": 4532,
+        "output_tokens": 248,
+        "total_tokens": 4780,
+        "reasoning_tokens": 23
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 9191.13,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 4,
+      "logical_call": 4,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:31:11.978990+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 29987,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 151401,
+      "reserved_microdollars": 22293,
+      "usage": {
+        "input_tokens": 5626,
+        "output_tokens": 361,
+        "total_tokens": 5987,
+        "reasoning_tokens": 27
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 12690.27,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 5,
+      "logical_call": 5,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:31:41.979182+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 32177,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 157971,
+      "reserved_microdollars": 24717,
+      "usage": {
+        "input_tokens": 6224,
+        "output_tokens": 403,
+        "total_tokens": 6627,
+        "reasoning_tokens": 16
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 10926.72,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 6,
+      "logical_call": 6,
+      "scenario": "known_pool_exhaustion",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:32:11.979438+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 32695,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 159525,
+      "reserved_microdollars": 23922,
+      "usage": {
+        "input_tokens": 6349,
+        "output_tokens": 325,
+        "total_tokens": 6674,
+        "reasoning_tokens": 17
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 15793.83,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 7,
+      "logical_call": 7,
+      "scenario": "known_pool_exhaustion",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:32:41.979668+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 29752,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 150696,
+      "reserved_microdollars": 21018,
+      "usage": {
+        "input_tokens": 5616,
+        "output_tokens": 278,
+        "total_tokens": 5894,
+        "reasoning_tokens": 99
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 10062.99,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 8,
+      "logical_call": 8,
+      "scenario": "known_pool_exhaustion",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:33:11.979827+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 31358,
+      "max_combined_output_tokens": 8192,
+      "pre_dispatch_microdollars": 216954,
+      "reserved_microdollars": 59136,
+      "usage": {
+        "input_tokens": 5797,
+        "output_tokens": 2783,
+        "total_tokens": 8580,
+        "reasoning_tokens": 5
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 67379.06,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 9,
+      "logical_call": 9,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:37:38.547201+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 18400,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 116640,
+      "reserved_microdollars": 9069,
+      "usage": {
+        "input_tokens": 2308,
+        "output_tokens": 143,
+        "total_tokens": 2451,
+        "reasoning_tokens": 17
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 6679.45,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 10,
+      "logical_call": 10,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:38:08.547475+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 21748,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 126684,
+      "reserved_microdollars": 13494,
+      "usage": {
+        "input_tokens": 3308,
+        "output_tokens": 238,
+        "total_tokens": 3546,
+        "reasoning_tokens": 57
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 11723.1,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 11,
+      "logical_call": 11,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:38:38.547683+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 25785,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 138795,
+      "reserved_microdollars": 21408,
+      "usage": {
+        "input_tokens": 4476,
+        "output_tokens": 532,
+        "total_tokens": 5008,
+        "reasoning_tokens": 66
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 18872.5,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 12,
+      "logical_call": 12,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:39:08.547997+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 26347,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 140481,
+      "reserved_microdollars": 21840,
+      "usage": {
+        "input_tokens": 4610,
+        "output_tokens": 534,
+        "total_tokens": 5144,
+        "reasoning_tokens": 89
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 16963.07,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 13,
+      "logical_call": 13,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:39:38.548194+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 26941,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 142263,
+      "reserved_microdollars": 22932,
+      "usage": {
+        "input_tokens": 4739,
+        "output_tokens": 581,
+        "total_tokens": 5320,
+        "reasoning_tokens": 44
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 18093.15,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 14,
+      "logical_call": 14,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:40:08.548426+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 27588,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 144204,
+      "reserved_microdollars": 21657,
+      "usage": {
+        "input_tokens": 4879,
+        "output_tokens": 468,
+        "total_tokens": 5347,
+        "reasoning_tokens": 13
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 17479.13,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 15,
+      "logical_call": 15,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:40:38.548664+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 24768,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 135744,
+      "reserved_microdollars": 15966,
+      "usage": {
+        "input_tokens": 4182,
+        "output_tokens": 228,
+        "total_tokens": 4410,
+        "reasoning_tokens": 21
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 10094.05,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 16,
+      "logical_call": 16,
+      "scenario": "slow_query_unchanged_pool",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:41:08.548883+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 26048,
+      "max_combined_output_tokens": 8192,
+      "pre_dispatch_microdollars": 201024,
+      "reserved_microdollars": 51516,
+      "usage": {
+        "input_tokens": 4322,
+        "output_tokens": 2570,
+        "total_tokens": 6892,
+        "reasoning_tokens": 96
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 59763.6,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 17,
+      "logical_call": 17,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:44:27.766285+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 18400,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 116640,
+      "reserved_microdollars": 8934,
+      "usage": {
+        "input_tokens": 2308,
+        "output_tokens": 134,
+        "total_tokens": 2442,
+        "reasoning_tokens": 9
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 6435.65,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 18,
+      "logical_call": 18,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:44:57.766607+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 21757,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 126711,
+      "reserved_microdollars": 13701,
+      "usage": {
+        "input_tokens": 3307,
+        "output_tokens": 252,
+        "total_tokens": 3559,
+        "reasoning_tokens": 44
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 9524.14,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 19,
+      "logical_call": 19,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:45:27.766811+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 25431,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 137733,
+      "reserved_microdollars": 16464,
+      "usage": {
+        "input_tokens": 4408,
+        "output_tokens": 216,
+        "total_tokens": 4624,
+        "reasoning_tokens": 29
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 10312.97,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 20,
+      "logical_call": 20,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:45:57.767039+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 29236,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 149148,
+      "reserved_microdollars": 23907,
+      "usage": {
+        "input_tokens": 5464,
+        "output_tokens": 501,
+        "total_tokens": 5965,
+        "reasoning_tokens": 15
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 17173.6,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 21,
+      "logical_call": 21,
+      "scenario": "permanent_unavailable",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:46:27.767264+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 29783,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 150789,
+      "reserved_microdollars": 23097,
+      "usage": {
+        "input_tokens": 5604,
+        "output_tokens": 419,
+        "total_tokens": 6023,
+        "reasoning_tokens": 59
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 15216.38,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 22,
+      "logical_call": 22,
+      "scenario": "permanent_unavailable",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:46:57.767484+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 28947,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 148281,
+      "reserved_microdollars": 19059,
+      "usage": {
+        "input_tokens": 5423,
+        "output_tokens": 186,
+        "total_tokens": 5609,
+        "reasoning_tokens": 35
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 9131.66,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 23,
+      "logical_call": 23,
+      "scenario": "permanent_unavailable",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:47:27.767663+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 29413,
+      "max_combined_output_tokens": 8192,
+      "pre_dispatch_microdollars": 211119,
+      "reserved_microdollars": 59469,
+      "usage": {
+        "input_tokens": 5308,
+        "output_tokens": 2903,
+        "total_tokens": 8211,
+        "reasoning_tokens": 25
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 78631.39,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 24,
+      "logical_call": 24,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:50:31.274739+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 19594,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 120222,
+      "reserved_microdollars": 12273,
+      "usage": {
+        "input_tokens": 2601,
+        "output_tokens": 298,
+        "total_tokens": 2899,
+        "reasoning_tokens": 39
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 11501.91,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 25,
+      "logical_call": 25,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:51:01.275053+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 23965,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 133335,
+      "reserved_microdollars": 19200,
+      "usage": {
+        "input_tokens": 3830,
+        "output_tokens": 514,
+        "total_tokens": 4344,
+        "reasoning_tokens": 15
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 16764.67,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 26,
+      "logical_call": 26,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:51:31.275340+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 26076,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 139668,
+      "reserved_microdollars": 23559,
+      "usage": {
+        "input_tokens": 4448,
+        "output_tokens": 681,
+        "total_tokens": 5129,
+        "reasoning_tokens": 70
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 20341.29,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 27,
+      "logical_call": 27,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:52:01.275624+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 27035,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 142545,
+      "reserved_microdollars": 22572,
+      "usage": {
+        "input_tokens": 4669,
+        "output_tokens": 571,
+        "total_tokens": 5240,
+        "reasoning_tokens": 10
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 15128.05,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 28,
+      "logical_call": 28,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:52:31.275800+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 27671,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 144453,
+      "reserved_microdollars": 22002,
+      "usage": {
+        "input_tokens": 4819,
+        "output_tokens": 503,
+        "total_tokens": 5322,
+        "reasoning_tokens": 23
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 16223.01,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 29,
+      "logical_call": 29,
+      "scenario": "injected_log",
+      "stage": "Decision",
+      "started_at": "2026-09-30T02:53:01.276049+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 28308,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 146364,
+      "reserved_microdollars": 22407,
+      "usage": {
+        "input_tokens": 4949,
+        "output_tokens": 504,
+        "total_tokens": 5453,
+        "reasoning_tokens": 48
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 15810.46,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 30,
+      "logical_call": 30,
+      "scenario": "injected_log",
+      "stage": "ReviewDecision",
+      "started_at": "2026-09-30T02:53:31.276309+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 25446,
+      "max_combined_output_tokens": 4096,
+      "pre_dispatch_microdollars": 137778,
+      "reserved_microdollars": 16464,
+      "usage": {
+        "input_tokens": 4228,
+        "output_tokens": 252,
+        "total_tokens": 4480,
+        "reasoning_tokens": 87
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 10505.39,
+      "returned_model": "kimi-k3"
+    },
+    {
+      "attempt": 31,
+      "logical_call": 31,
+      "scenario": "injected_log",
+      "stage": "IncidentReport",
+      "started_at": "2026-09-30T02:54:01.276591+00:00",
+      "status": "completed",
+      "wire_model": "kimi-k3",
+      "input_token_upper_bound": 27544,
+      "max_combined_output_tokens": 8192,
+      "pre_dispatch_microdollars": 205512,
+      "reserved_microdollars": 65310,
+      "usage": {
+        "input_tokens": 4570,
+        "output_tokens": 3440,
+        "total_tokens": 8010,
+        "reasoning_tokens": 78
+      },
+      "reasoning_effort": "low",
+      "http_status": 200,
+      "elapsed_ms": 81483.22,
+      "returned_model": "kimi-k3"
+    }
+  ],
+  "runs": [
+    {
+      "scenario": "known_pool_exhaustion",
+      "run_id": "54849c9d789d4997bc53d80fbc23f7b3",
+      "status": "completed",
+      "started_at": "2026-09-30T02:29:38.585971+00:00",
+      "completed_at": "2026-09-30T02:34:19.482513+00:00"
+    },
+    {
+      "scenario": "slow_query_unchanged_pool",
+      "run_id": "50d69f1e79a74448a4ea93e761a14962",
+      "status": "completed",
+      "started_at": "2026-09-30T02:37:35.117058+00:00",
+      "completed_at": "2026-09-30T02:42:08.462809+00:00"
+    },
+    {
+      "scenario": "permanent_unavailable",
+      "run_id": "78febcd7ea484bc1a4d1542e88855f07",
+      "status": "completed",
+      "started_at": "2026-09-30T02:44:24.437863+00:00",
+      "completed_at": "2026-09-30T02:48:46.520802+00:00"
+    },
+    {
+      "scenario": "injected_log",
+      "run_id": "563775a6aca94fdfa8ab145ef8b3ddec",
+      "status": "failed",
+      "started_at": "2026-09-30T02:50:28.114200+00:00",
+      "completed_at": "2026-09-30T02:55:22.886569+00:00"
+    }
+  ],
+  "batch_stop_reason": null,
+  "reserved_service_microdollars": 740697,
+  "service_charge_upper_bound_usd": 0.740697
+}

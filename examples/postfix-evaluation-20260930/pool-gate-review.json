@@ -1,0 +1,25 @@
+{
+  "reviewer": "coding_agent",
+  "human_review_performed": false,
+  "run_id": "54849c9d789d4997bc53d80fbc23f7b3",
+  "proceed": true,
+  "trace_discovery_followed_by_retrieval": true,
+  "controller_defect_blocked_retrieval": false,
+  "timeline_contract_rejection_recurred": false,
+  "causal_assessment": "PASS",
+  "evidence": {
+    "pool_limit_evidence_id": "synthetic-005",
+    "observed_pool_limits": [
+      10,
+      2
+    ],
+    "retrieved_trace_evidence_id": "synthetic-007",
+    "acquisition_ms": 833.456,
+    "query_execution_ms": 205.123
+  },
+  "limitations": [
+    "One selected trace is not a population average.",
+    "One check remains unresolvable after two rejected resolutions cited retrieved trace evidence for a declared discovery target.",
+    "The model appropriately describes the final cause as a supported hypothesis, not proof."
+  ]
+}

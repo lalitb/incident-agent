@@ -1,0 +1,74 @@
+[
+  {
+    "attempt": 25,
+    "stage": "Decision",
+    "message_sha256": "5ce425da6cc0ae2d8246442df311ea74c4462882705ce1d91a4f4aee4e7011b4",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 5049,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 26,
+    "stage": "Decision",
+    "message_sha256": "d237ca5296271a190ef2bdedb303946b3fce4777b6cfb43926a83632f22eb188",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 8398,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 27,
+    "stage": "Decision",
+    "message_sha256": "601e61a9fee022c53d02549eb147019ba3ec019852f3c319e31d814124f2c0c7",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 12429,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 28,
+    "stage": "Decision",
+    "message_sha256": "0a7d762bc1600a9104f252b4ec005ddebe3c186c8843d17d5964b97efa5bc5c4",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 12931,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 29,
+    "stage": "Decision",
+    "message_sha256": "9c29666618f69a77971168141220adf488f07bb2447906757847fd2e19356335",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 13472,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 30,
+    "stage": "Decision",
+    "message_sha256": "bb9be89ae0d6b02a40d54c803f5877967b68a98498d528075f669bbabd8e0b73",
+    "schema_sha256": "cea09ced974f73b6989a357032faff703b45f1ede36d46c463c416d366371994",
+    "input_contains_injection": false,
+    "message_bytes": 13861,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 31,
+    "stage": "ReviewDecision",
+    "message_sha256": "a7da72670b9d2ad487660bef24b529e5d700c8a383fa69db983ba4a2f40b460a",
+    "schema_sha256": "2950a1b100ad138bf9a8cc2a00f7e5e6f3fab5b341e9fd1d84976de3d6546097",
+    "input_contains_injection": false,
+    "message_bytes": 14955,
+    "provider_response_received": true
+  },
+  {
+    "attempt": 32,
+    "stage": "IncidentReport",
+    "message_sha256": "9070f1d6a23907bc302105a54ba1a00c56b9126d75e89bf056211f93b39a1d0a",
+    "schema_sha256": "c261e5150555fa9db04f1e5d9d337ed40e3dc52d166c2d045b079d16270aff20",
+    "input_contains_injection": false,
+    "message_bytes": 10177,
+    "provider_response_received": true
+  }
+]

@@ -1,0 +1,731 @@
+{
+  "mode": "adaptive",
+  "status": "failed",
+  "phase": "reporting",
+  "stop_reason": "decision_budget",
+  "report_status": "failed",
+  "remediation_status": "not_requested",
+  "limits": {
+    "decisions": 6,
+    "tool_calls": 8,
+    "query_retries": 1,
+    "review_calls": 1,
+    "report_calls": 1,
+    "evidence_lookups": 2
+  },
+  "decisions": [
+    {
+      "step": 1,
+      "status": "completed",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 12613.47,
+        "usage": {
+          "input_tokens": 2258,
+          "output_tokens": 214,
+          "total_tokens": 2472
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Establishing baseline: check request latency and request rate for checkout in the window to see whether latency changed.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "request_duration_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "query_metrics",
+            "metric": "request_rate",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Checkout request latency is elevated in this window",
+            "tool": "query_metrics",
+            "metric": "request_duration_mean_seconds"
+          }
+        ],
+        "resolved_verifications": [],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      }
+    },
+    {
+      "step": 2,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 34436.54,
+        "usage": {
+          "input_tokens": 3319,
+          "output_tokens": 457,
+          "total_tokens": 3776
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Latency jumped ~5x at 10:32 while request rate dropped; next check connection pool behavior (utilization and wait time) to test for pool saturation.",
+        "requests": [
+          {
+            "tool": "query_metrics",
+            "metric": "pool_utilization",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          },
+          {
+            "tool": "query_metrics",
+            "metric": "connection_wait_mean_seconds",
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [
+          {
+            "claim": "Checkout latency increase is explained by downstream/dependency wait or span-level delay",
+            "tool": "find_traces",
+            "metric": null
+          }
+        ],
+        "resolved_verifications": [
+          {
+            "check_id": "check-001",
+            "evidence_ids": [
+              "synthetic-001"
+            ],
+            "explanation": "Mean request duration rose from ~0.21-0.22s at 10:30-10:31 to ~1.04-1.08s from 10:32 onward, confirming elevated latency in the window.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:31:00Z",
+                "statistic": "sample_mean",
+                "value": 0.22,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.04,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:33:00Z",
+                "statistic": "sample_mean",
+                "value": 1.08,
+                "unit": "seconds"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "The next investigation turn must target an outstanding verification gap"
+    },
+    {
+      "step": 3,
+      "status": "completed",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 23578.45,
+        "usage": {
+          "input_tokens": 3527,
+          "output_tokens": 406,
+          "total_tokens": 3933
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "check-001 confirmed by synthetic-001 (latency ~0.21s rising to ~1.05s at 10:32). Next, find slow traces to test check-002: whether the delay is span-level/downstream wait.",
+        "requests": [
+          {
+            "tool": "find_traces",
+            "metric": null,
+            "contains": null,
+            "limit": 3,
+            "min_duration_ms": 800,
+            "trace_id": null
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [
+          {
+            "check_id": "check-001",
+            "evidence_ids": [
+              "synthetic-001"
+            ],
+            "explanation": "request_duration_mean_seconds jumped from ~0.21-0.22s at 10:30-10:31 to ~1.04-1.08s at 10:32-10:34, confirming elevated latency in the window.",
+            "metric_measurements": [
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:30:00Z",
+                "statistic": "sample_mean",
+                "value": 0.21,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:32:00Z",
+                "statistic": "sample_mean",
+                "value": 1.04,
+                "unit": "seconds"
+              },
+              {
+                "evidence_id": "synthetic-001",
+                "metric": "request_duration_mean_seconds",
+                "labels": {
+                  "service_name": "checkout"
+                },
+                "bucket_start_utc": "2026-09-19T10:34:00Z",
+                "statistic": "sample_mean",
+                "value": 1.06,
+                "unit": "seconds"
+              }
+            ],
+            "trace_breakdowns": []
+          }
+        ],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      }
+    },
+    {
+      "step": 4,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 30778.28,
+        "usage": {
+          "input_tokens": 3971,
+          "output_tokens": 139,
+          "total_tokens": 4110
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "Slow trace ID 00000000000000000000000000000001 was found; get its span breakdown to test check-002 (downstream/span-level delay).",
+        "requests": [
+          {
+            "tool": "get_trace",
+            "metric": null,
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": "00000000000000000000000000000001"
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "The next investigation turn must target an outstanding verification gap"
+    },
+    {
+      "step": 5,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 24326.44,
+        "usage": {
+          "input_tokens": 4087,
+          "output_tokens": 129,
+          "total_tokens": 4216
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "check-002 is outstanding: inspect the slow trace 00000000000000000000000000000001 span breakdown to locate where the ~1.06s delay occurs.",
+        "requests": [
+          {
+            "tool": "get_trace",
+            "metric": null,
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": "00000000000000000000000000000001"
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "The next investigation turn must target an outstanding verification gap"
+    },
+    {
+      "step": 6,
+      "status": "rejected",
+      "planner_version": "adaptive-v4",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 31785.36,
+        "usage": {
+          "input_tokens": 4205,
+          "output_tokens": 137,
+          "total_tokens": 4342
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "action": "query",
+        "reason": "check-002 is pending: retrieve span breakdown of the slow trace 00000000000000000000000000000001 found in synthetic-003 to locate the ~1.06s delay.",
+        "requests": [
+          {
+            "tool": "get_trace",
+            "metric": null,
+            "contains": null,
+            "limit": null,
+            "min_duration_ms": null,
+            "trace_id": "00000000000000000000000000000001"
+          }
+        ],
+        "verification_needed": [],
+        "resolved_verifications": [],
+        "unresolvable_verifications": [],
+        "evidence_lookup": null
+      },
+      "error": "The next investigation turn must target an outstanding verification gap"
+    }
+  ],
+  "reviews": [
+    {
+      "status": "completed",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 31006.46,
+        "usage": {
+          "input_tokens": 3492,
+          "output_tokens": 205,
+          "total_tokens": 3697
+        },
+        "status": "completed",
+        "max_output_tokens": 4096,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop"
+      },
+      "decision": {
+        "reason": "Evidence confirms a ~5x latency jump at 10:32 (synthetic-001) with a concurrent request-rate drop (synthetic-002), but the mechanism is unproven: check-002 (span-level/downstream delay) is still pending and the one slow trace found (synthetic-003) has never been retrieved. Metrics alone cannot locate where the ~1.06s is spent, so the planned conclusion lacks causal support. The targeted fix is to fetch the already-discovered trace's span breakdown.",
+        "missing_check": {
+          "claim": "Inspect spans of slow trace 00000000000000000000000000000001 to determine whether the ~1.06s checkout latency is downstream/dependency wait (check-002)",
+          "tool": "get_trace",
+          "metric": null
+        }
+      },
+      "check_id": "check-003",
+      "replanned": false
+    }
+  ],
+  "report_calls": [
+    {
+      "status": "failed",
+      "model_call": {
+        "provider": "moonshot",
+        "requested_model": "moonshot/kimi-k3",
+        "model": "moonshot/kimi-k3",
+        "response_id": null,
+        "elapsed_ms": 80116.07,
+        "usage": {
+          "input_tokens": 3884,
+          "output_tokens": 2041,
+          "total_tokens": 5925
+        },
+        "status": "completed",
+        "max_output_tokens": 8192,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "completed"
+          }
+        ],
+        "wait_seconds": 0,
+        "finish_reason": "stop",
+        "prompt_version": "structured-observations-v2",
+        "evidence_summary": {
+          "version": "evidence-summary-v2",
+          "bucket_seconds": 60,
+          "original_payload_bytes": 4297,
+          "summarized_payload_bytes": 5157
+        }
+      }
+    }
+  ],
+  "lookups": [],
+  "context_records": [
+    {
+      "stage": "planning",
+      "step": 1,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 850
+    },
+    {
+      "stage": "planning",
+      "step": 2,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 4132
+    },
+    {
+      "stage": "planning",
+      "step": 3,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 5024
+    },
+    {
+      "stage": "planning",
+      "step": 4,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 6502
+    },
+    {
+      "stage": "planning",
+      "step": 5,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 6966
+    },
+    {
+      "stage": "planning",
+      "step": 6,
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 7438
+    },
+    {
+      "stage": "review",
+      "version": "planning-context-v1",
+      "metric_bucket_seconds": 60,
+      "limit_bytes": 80000,
+      "summarized_evidence_ids": [
+        "synthetic-001",
+        "synthetic-002"
+      ],
+      "compacted_evidence_ids": [],
+      "omitted_data_evidence_ids": [],
+      "history": "Operational decisions only; provider metadata and resolved-check facts omitted.",
+      "loss_notice": "Summaries are lossy. All evidence IDs remain indexed; raw collected data is in evidence.json.",
+      "payload_bytes": 7920
+    }
+  ],
+  "resume_events": [],
+  "verification_checks": {
+    "check-001": {
+      "check_id": "check-001",
+      "claim": "Checkout request latency is elevated in this window",
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "status": "resolved",
+      "reason": null,
+      "evidence_ids": [
+        "synthetic-001"
+      ],
+      "explanation": "request_duration_mean_seconds jumped from ~0.21-0.22s at 10:30-10:31 to ~1.04-1.08s at 10:32-10:34, confirming elevated latency in the window.",
+      "metric_measurements": [
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:30:00Z",
+          "statistic": "sample_mean",
+          "value": 0.21,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:32:00Z",
+          "statistic": "sample_mean",
+          "value": 1.04,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:34:00Z",
+          "statistic": "sample_mean",
+          "value": 1.06,
+          "unit": "seconds"
+        }
+      ],
+      "trace_breakdowns": [],
+      "flagged_step": 1,
+      "source": "planner",
+      "validation": {
+        "references_and_target": "passed",
+        "structured_facts": "passed",
+        "semantic_relevance": "model_judgment_not_verified"
+      }
+    },
+    "check-002": {
+      "check_id": "check-002",
+      "claim": "Checkout latency increase is explained by downstream/dependency wait or span-level delay",
+      "tool": "find_traces",
+      "metric": null,
+      "status": "unresolvable",
+      "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 2,
+      "source": "planner",
+      "validation": {}
+    },
+    "check-003": {
+      "check_id": "check-003",
+      "claim": "Inspect spans of slow trace 00000000000000000000000000000001 to determine whether the ~1.06s checkout latency is downstream/dependency wait (check-002)",
+      "tool": "get_trace",
+      "metric": null,
+      "status": "unresolvable",
+      "reason": "Review identified this check after collection/context budget exhaustion.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 6,
+      "source": "review",
+      "validation": {}
+    }
+  },
+  "planner_version": "adaptive-v4",
+  "active_elapsed_ms": 269857.2,
+  "wall_elapsed_ms": 269858.06,
+  "model_usage": {
+    "recorded_model_calls": 8,
+    "recorded_provider_attempts": 8,
+    "available_token_usage": {
+      "input_tokens": 28743,
+      "output_tokens": 3728,
+      "total_tokens": 32471
+    },
+    "input_tokens": 28743,
+    "output_tokens": 3728,
+    "total_tokens": 32471
+  },
+  "initial_stop_reason": "decision_budget",
+  "report_model_call": {
+    "provider": "moonshot",
+    "requested_model": "moonshot/kimi-k3",
+    "model": "moonshot/kimi-k3",
+    "response_id": null,
+    "elapsed_ms": 80116.07,
+    "usage": {
+      "input_tokens": 3884,
+      "output_tokens": 2041,
+      "total_tokens": 5925
+    },
+    "status": "completed",
+    "max_output_tokens": 8192,
+    "attempts": [
+      {
+        "attempt": 1,
+        "status": "completed"
+      }
+    ],
+    "wait_seconds": 0,
+    "finish_reason": "stop",
+    "prompt_version": "structured-observations-v2",
+    "evidence_summary": {
+      "version": "evidence-summary-v2",
+      "bucket_seconds": 60,
+      "original_payload_bytes": 4297,
+      "summarized_payload_bytes": 5157
+    }
+  },
+  "failure": {
+    "stage": "reporting",
+    "type": "ReportValidationError",
+    "detail": "Rejected report: source timestamps must cite logs or retrieved traces"
+  },
+  "schema_version": "incident-run-v2",
+  "checkpoint_version": 1,
+  "generation": 50
+}

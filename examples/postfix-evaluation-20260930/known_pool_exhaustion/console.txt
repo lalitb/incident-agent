@@ -1,0 +1,460 @@
+
+Run directory: runs/postfix-evaluation-20260930/known_pool_exhaustion/54849c9d789d4997bc53d80fbc23f7b3
+
+Planning step 1/6...
+Decision: query: Establish baseline: check request rate and mean request duration for checkout in the window to confirm whether latency changed.
+Collected query_metrics: 1 result items
+Collected query_metrics: 1 result items
+
+Planning step 2/6...
+Waiting 20s before model request...
+Decision: query: Latency jumped ~5x at 10:32 while request rate dropped 40→10 rps, suggesting resource contention rather than load. Check connection pool utilization/wait and logs for errors or deploy events around 10:32.
+Collected query_metrics: 1 result items
+Collected query_metrics: 2 result items
+
+Planning step 3/6...
+Waiting 13s before model request...
+Decision: query: Metrics show latency jumped at 10:32 when v2 started serving with pool utilization pinned at 1.0 and connection wait ~0.8s. Need pool_limit to compare configured pool size across versions, and a slow trace to confirm connection wait dominates span-level delay.
+Collected query_metrics: 2 result items
+Collected find_traces: 1 result items
+
+Planning step 4/6...
+Waiting 17s before model request...
+Decision: query: pool_limit evidence already shows v1=10 vs v2=2 connections, resolving check-002. Retrieve the discovered slow trace to get span-level evidence for check-003 (connection wait dominating latency).
+Collected get_trace: 3 result items
+
+Planning step 5/6...
+Waiting 14s before model request...
+Rejected decision: Resolution evidence does not match the check target
+
+Planning step 6/6...
+Waiting 16s before model request...
+Rejected decision: Resolution evidence does not match the check target
+Investigation stopped: decision_budget
+Waiting 11s before model request...
+
+Requesting structured diagnosis from configured LLM...
+Evidence payload: 7,880 → 10,374 bytes
+Waiting 17s before model request...
+
+Incident report:
+{
+  "assessment": "likely_cause_identified",
+  "metric_measurements": [
+    {
+      "evidence_id": "synthetic-001",
+      "metric": "request_duration_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:30:00Z",
+      "statistic": "sample_mean",
+      "value": 0.21,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-001",
+      "metric": "request_duration_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:31:00Z",
+      "statistic": "sample_mean",
+      "value": 0.22,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-001",
+      "metric": "request_duration_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:32:00Z",
+      "statistic": "sample_mean",
+      "value": 1.04,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-001",
+      "metric": "request_duration_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:33:00Z",
+      "statistic": "sample_mean",
+      "value": 1.08,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-001",
+      "metric": "request_duration_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:34:00Z",
+      "statistic": "sample_mean",
+      "value": 1.06,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-002",
+      "metric": "request_rate",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:30:00Z",
+      "statistic": "sample_mean",
+      "value": 40.0,
+      "unit": "requests/second"
+    },
+    {
+      "evidence_id": "synthetic-002",
+      "metric": "request_rate",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:32:00Z",
+      "statistic": "sample_mean",
+      "value": 10.0,
+      "unit": "requests/second"
+    },
+    {
+      "evidence_id": "synthetic-003",
+      "metric": "connection_wait_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:31:00Z",
+      "statistic": "sample_mean",
+      "value": 0.002,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-003",
+      "metric": "connection_wait_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:32:00Z",
+      "statistic": "sample_mean",
+      "value": 0.81,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-003",
+      "metric": "connection_wait_mean_seconds",
+      "labels": {
+        "service_name": "checkout"
+      },
+      "bucket_start_utc": "2026-09-19T10:33:00Z",
+      "statistic": "sample_mean",
+      "value": 0.84,
+      "unit": "seconds"
+    },
+    {
+      "evidence_id": "synthetic-004",
+      "metric": "pool_utilization",
+      "labels": {
+        "service_name": "checkout",
+        "service_version": "v1"
+      },
+      "bucket_start_utc": "2026-09-19T10:30:00Z",
+      "statistic": "sample_mean",
+      "value": 0.6,
+      "unit": "ratio"
+    },
+    {
+      "evidence_id": "synthetic-004",
+      "metric": "pool_utilization",
+      "labels": {
+        "service_name": "checkout",
+        "service_version": "v2"
+      },
+      "bucket_start_utc": "2026-09-19T10:32:00Z",
+      "statistic": "sample_mean",
+      "value": 1.0,
+      "unit": "ratio"
+    }
+  ],
+  "configuration_comparisons": [
+    {
+      "metric": "pool_limit",
+      "observations": [
+        {
+          "service_version": "v1",
+          "value": 10.0,
+          "evidence_id": "synthetic-005"
+        },
+        {
+          "service_version": "v2",
+          "value": 2.0,
+          "evidence_id": "synthetic-005"
+        }
+      ]
+    }
+  ],
+  "trace_breakdowns": [
+    {
+      "trace_id": "00000000000000000000000000000001",
+      "evidence_id": "synthetic-007",
+      "spans": [
+        {
+          "span_id": "0000000000000001",
+          "name": "POST /checkout",
+          "duration_ms": 1060.123
+        },
+        {
+          "span_id": "0000000000000002",
+          "name": "db.acquire_connection",
+          "duration_ms": 833.456
+        },
+        {
+          "span_id": "0000000000000003",
+          "name": "db.checkout_query",
+          "duration_ms": 205.123
+        }
+      ]
+    }
+  ],
+  "timeline_observations": [
+    {
+      "statement": "Request duration sample_mean rose from ~0.21s in the 10:30 bucket to 1.04s in the 10:32 bucket and stayed elevated through 10:34.",
+      "start_utc": "2026-09-19T10:32:00Z",
+      "end_utc": "2026-09-19T10:33:00Z",
+      "precision": "metric_bucket",
+      "evidence_ids": [
+        "synthetic-001"
+      ]
+    },
+    {
+      "statement": "Connection wait sample_mean rose from ~0.002s in the 10:31 bucket to 0.81s in the 10:32 bucket, coinciding with the latency shift.",
+      "start_utc": "2026-09-19T10:32:00Z",
+      "end_utc": "2026-09-19T10:33:00Z",
+      "precision": "metric_bucket",
+      "evidence_ids": [
+        "synthetic-003"
+      ]
+    },
+    {
+      "statement": "Pool utilization for service_version v2 was pinned at 1.0 in the 10:32 through 10:34 buckets while v1 showed 0.6-0.7 earlier.",
+      "start_utc": "2026-09-19T10:32:00Z",
+      "end_utc": "2026-09-19T10:35:00Z",
+      "precision": "metric_bucket",
+      "evidence_ids": [
+        "synthetic-004"
+      ]
+    },
+    {
+      "statement": "A retrieved slow trace at 10:33:10 shows a 1060.123 ms checkout span with db.acquire_connection at 833.456 ms.",
+      "start_utc": "2026-09-19T10:33:10.000000000Z",
+      "end_utc": "2026-09-19T10:33:10.000000000Z",
+      "precision": "source_timestamp",
+      "evidence_ids": [
+        "synthetic-007"
+      ]
+    }
+  ],
+  "leading_hypothesis": {
+    "statement": "Checkout latency in this window is plausibly explained by the v2 configuration having pool_limit 2 (vs 10 on v1): from the 10:32 bucket onward the pool is fully utilized (1.0), connection wait dominates (~0.8s of ~1.05s request duration), and the single retrieved slow trace shows connection acquisition (833.456 ms) dwarfing query execution (205.123 ms). This is a supported hypothesis, not proof.",
+    "evidence_ids": [
+      "synthetic-001",
+      "synthetic-003",
+      "synthetic-004",
+      "synthetic-005",
+      "synthetic-007"
+    ],
+    "verification_needed": [
+      "check-003 remains unresolvable: connection-pool wait dominance across slow requests was not confirmed because collection hit a decision_budget limit; only one trace was retrieved, so population-level dominance of acquire_connection is unverified.",
+      "Whether the v1-to-v2 pool_limit change was an actual deployment/configuration change (version labels alone do not prove a rollout) is not established by the telemetry.",
+      "Request rate dropped from 40 to 10 requests/second at the same time; whether this is a cause, effect, or unrelated is unresolved.",
+      "check-003: Slow checkout requests are dominated by connection-pool wait, not downstream or service compute time (unresolvable: Collection ended (decision_budget); this check could not be resolved within the original limits.)"
+    ]
+  },
+  "supporting_findings": [
+    {
+      "statement": "Mean request duration rose ~5x from ~0.21-0.22s (10:30-10:31 buckets) to ~1.04-1.08s (10:32-10:34 buckets).",
+      "evidence_ids": [
+        "synthetic-001"
+      ]
+    },
+    {
+      "statement": "Mean connection wait rose from ~0.001-0.002s to ~0.81-0.84s in the same buckets, accounting for most of the latency increase.",
+      "evidence_ids": [
+        "synthetic-003",
+        "synthetic-001"
+      ]
+    },
+    {
+      "statement": "Pool utilization for v2 was saturated at 1.0 across all three degraded buckets, while v1 ran at 0.6-0.7.",
+      "evidence_ids": [
+        "synthetic-004"
+      ]
+    },
+    {
+      "statement": "pool_limit differs by version: v1 observed at 10 connections, v2 observed at 2 connections, aligning with the onset of saturation and waits.",
+      "evidence_ids": [
+        "synthetic-005"
+      ]
+    },
+    {
+      "statement": "The one retrieved slow trace shows db.acquire_connection at 833.456 ms versus db.checkout_query at 205.123 ms within a 1060.123 ms request, consistent with acquisition wait dominating; it is a single trace, not a population average.",
+      "evidence_ids": [
+        "synthetic-007"
+      ]
+    }
+  ],
+  "contradicting_findings": [
+    {
+      "statement": "Request rate fell from 40 to 10 requests/second exactly when latency rose; lower load with higher latency is consistent with a capacity/config constraint but also means demand change cannot be ruled out as a factor.",
+      "evidence_ids": [
+        "synthetic-002"
+      ]
+    }
+  ],
+  "confidence": "medium",
+  "missing_information": [
+    "Only one trace was retrieved (decision_budget stopped collection); whether connection wait dominates across slow requests generally is unverified (check-003 unresolvable).",
+    "No log evidence was collected to corroborate deployment or configuration-change events around 10:32.",
+    "No downstream/database-side metrics were collected to rule out database-side causes.",
+    "Exact incident onset within bucket boundaries is unknown.",
+    "check-003: Slow checkout requests are dominated by connection-pool wait, not downstream or service compute time (unresolvable: Collection ended (decision_budget); this check could not be resolved within the original limits.)"
+  ],
+  "recommended_next_steps": [
+    "Retrieve additional slow traces or aggregate span metrics to confirm db.acquire_connection dominates across the slow-request population.",
+    "Collect logs or config-change records to determine whether the v1-to-v2 pool_limit change (10 to 2) was a deliberate deployment.",
+    "If confirmed, propose a controlled test restoring pool_limit to 10 on v2 and observe whether connection wait and latency return to baseline; treat this as a proposal only, no action executed.",
+    "Investigate why request rate dropped from 40 to 10 requests/second to separate load effects from pool effects."
+  ],
+  "verification_checks": [
+    {
+      "check_id": "check-001",
+      "claim": "Checkout request latency is elevated in this window relative to expectation",
+      "tool": "query_metrics",
+      "metric": "request_duration_mean_seconds",
+      "status": "resolved",
+      "reason": null,
+      "evidence_ids": [
+        "synthetic-001"
+      ],
+      "explanation": "Mean request duration rose from ~0.21-0.22s (10:30-10:31) to ~1.04-1.08s (10:32-10:34), confirming elevated latency in the window.",
+      "metric_measurements": [
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:31:00Z",
+          "statistic": "sample_mean",
+          "value": 0.22,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:32:00Z",
+          "statistic": "sample_mean",
+          "value": 1.04,
+          "unit": "seconds"
+        },
+        {
+          "evidence_id": "synthetic-001",
+          "metric": "request_duration_mean_seconds",
+          "labels": {
+            "service_name": "checkout"
+          },
+          "bucket_start_utc": "2026-09-19T10:34:00Z",
+          "statistic": "sample_mean",
+          "value": 1.06,
+          "unit": "seconds"
+        }
+      ],
+      "trace_breakdowns": [],
+      "flagged_step": 1,
+      "source": "planner",
+      "validation": {
+        "references_and_target": "passed",
+        "structured_facts": "passed",
+        "semantic_relevance": "model_judgment_not_verified"
+      }
+    },
+    {
+      "check_id": "check-002",
+      "claim": "Connection pool configuration (pool limit) differs between v1 and v2, explaining saturation at 10:32",
+      "tool": "query_metrics",
+      "metric": "pool_limit",
+      "status": "resolved",
+      "reason": null,
+      "evidence_ids": [
+        "synthetic-005"
+      ],
+      "explanation": "pool_limit differs across versions: v1 (10:30-10:31) is 10 connections, v2 (10:32-10:34) is 2 connections, coinciding with pool utilization pinned at 1.0 and elevated connection wait.",
+      "metric_measurements": [
+        {
+          "evidence_id": "synthetic-005",
+          "metric": "pool_limit",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v1"
+          },
+          "bucket_start_utc": "2026-09-19T10:30:00Z",
+          "statistic": "sample_mean",
+          "value": 10.0,
+          "unit": "connections"
+        },
+        {
+          "evidence_id": "synthetic-005",
+          "metric": "pool_limit",
+          "labels": {
+            "service_name": "checkout",
+            "service_version": "v2"
+          },
+          "bucket_start_utc": "2026-09-19T10:32:00Z",
+          "statistic": "sample_mean",
+          "value": 2.0,
+          "unit": "connections"
+        }
+      ],
+      "trace_breakdowns": [],
+      "flagged_step": 3,
+      "source": "planner",
+      "validation": {
+        "references_and_target": "passed",
+        "structured_facts": "passed",
+        "semantic_relevance": "model_judgment_not_verified"
+      }
+    },
+    {
+      "check_id": "check-003",
+      "claim": "Slow checkout requests are dominated by connection-pool wait, not downstream or service compute time",
+      "tool": "find_traces",
+      "metric": null,
+      "status": "unresolvable",
+      "reason": "Collection ended (decision_budget); this check could not be resolved within the original limits.",
+      "evidence_ids": [],
+      "explanation": null,
+      "metric_measurements": [],
+      "trace_breakdowns": [],
+      "flagged_step": 3,
+      "source": "planner",
+      "validation": {}
+    }
+  ]
+}
+
+Recorded model usage:
+{
+  "recorded_model_calls": 8,
+  "recorded_provider_attempts": 8,
+  "available_token_usage": {
+    "input_tokens": 39824,
+    "output_tokens": 4995,
+    "total_tokens": 44819
+  },
+  "input_tokens": 39824,
+  "output_tokens": 4995,
+  "total_tokens": 44819
+}
